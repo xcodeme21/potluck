@@ -16,6 +16,7 @@ class LoginViewModel: ObservableObject {
     @Published var isPasswordHidden: Bool = true
     @Published var showAlert: Bool = false
     @Published var loginResponse: LoginResponse?
+    @Published var shouldNavigateToHome = false
     
     private var loginService: LoginService
     
@@ -48,10 +49,11 @@ class LoginViewModel: ObservableObject {
         
         loginService.login(email: email, password: password) { result in
             DispatchQueue.main.async {
+                print(result, "tes")
                 switch result {
                 case .success(let response):
                     self.loginResponse = response
-                    // Lakukan sesuatu dengan response jika diperlukan
+                    self.saveOutputToUserDefaults(response)
                 case .failure:
                     self.showAlert = true
                 }
@@ -61,6 +63,17 @@ class LoginViewModel: ObservableObject {
     
     func togglePasswordVisibility() {
         isPasswordHidden.toggle()
+    }
+    
+    func saveOutputToUserDefaults(_ response: LoginResponse) {
+        if let outputData = try? JSONEncoder().encode(response.output) {
+            UserDefaults.standard.set(outputData, forKey: "loggedInUserOutput")
+            self.redirectToHome()
+        }
+    }
+    
+    func redirectToHome() {
+        self.shouldNavigateToHome = true
     }
 }
 

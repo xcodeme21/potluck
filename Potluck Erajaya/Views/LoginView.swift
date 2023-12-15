@@ -5,6 +5,10 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
+            NavigationLink(destination: HomeView(), isActive: $viewModel.shouldNavigateToHome) {
+                EmptyView()
+            }
+            .hidden()
             AsyncImage(url: URL(string: "https://potluck.eraspace.com/images/logo/logo.png")) { phase in
                 switch phase {
                 case .success(let image):
@@ -58,6 +62,7 @@ struct LoginView: View {
                                             .fill(Color.orange.opacity(0.1))
                                             .padding(.leading, 15)
                                     )
+                                    .padding(.top,10)
                             }
                             
                 Button(action: {
@@ -73,7 +78,7 @@ struct LoginView: View {
                         }
             
             Button(action: {
-                            viewModel.login() // Call login function from ViewModel
+                            viewModel.login()
                         }) {
                             Text("Login")
                                 .frame(maxWidth: .infinity)

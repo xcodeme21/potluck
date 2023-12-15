@@ -13,7 +13,7 @@ struct HomeView: View {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("Hello, kamu berhasil login!")
         }
         .padding()
     }

@@ -8,9 +8,9 @@
 import Foundation
 
 struct LoginResponse: Codable {
-    let ldapSetting: Int
+    let ldapSetting: Bool?
     let message: String
-    let success: Int
+    let success: Bool
     let output: Output?
     
     struct Output: Codable {

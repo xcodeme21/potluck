@@ -11,6 +11,7 @@ class LoginService {
     func login(email: String, password: String, completion: @escaping (Result<LoginResponse, Error>) -> Void) {
         let url = URL(string: "https://webservice.erajaya.com/ldap_server/api/login")!
         let parameters = ["email": email, "password": password]
+        print(parameters)
 
         guard let jsonData = try? JSONSerialization.data(withJSONObject: parameters) else {
             print("Error creating JSON data")

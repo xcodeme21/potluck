@@ -92,6 +92,7 @@
 		764828B52B2BF40100F8A131 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				76770A852B28548A00389C80 /* HomeView.swift */,
 				764828C12B2BF84B00F8A131 /* LoginView.swift */,
 			);
 			path = Views;
@@ -158,7 +159,6 @@
 				764828B42B2BF3EE00F8A131 /* Models */,
 				76770A5B2B28546700389C80 /* Potluck_ErajayaApp.swift */,
 				76770A5D2B28546700389C80 /* ContentView.swift */,
-				76770A852B28548A00389C80 /* HomeView.swift */,
 				76770A5F2B28546900389C80 /* Assets.xcassets */,
 				76770A612B28546900389C80 /* Preview Content */,
 			);
