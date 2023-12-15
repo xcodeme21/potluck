@@ -49,15 +49,35 @@ class LoginViewModel: ObservableObject {
         
         loginService.login(email: email, password: password) { result in
             DispatchQueue.main.async {
-                print(result, "tes")
                 switch result {
                 case .success(let response):
                     self.loginResponse = response
-                    self.saveOutputToUserDefaults(response)
+                    print(response)
+                    if response.success == true {
+                        if let outputData = response.output {
+                            let userData = UserData(email: outputData.email,
+                                                    group: outputData.group,
+                                                    mailServer: outputData.mailServer,
+                                                    name: outputData.name,
+                                                    title: outputData.title,
+                                                    username: outputData.username,
+                                                    yourIP: outputData.yourIP)
+                            self.saveOutputToUserDefaults(userData)
+                        }
+                    } else {
+                        self.showAlert = true
+                    }
                 case .failure:
                     self.showAlert = true
                 }
             }
+        }
+    }
+
+    func saveOutputToUserDefaults(_ response: UserData) {
+        if let outputData = try? JSONEncoder().encode(response) {
+            UserDefaults.standard.set(outputData, forKey: "userData")
+            self.redirectToHome()
         }
     }
     
@@ -65,15 +85,9 @@ class LoginViewModel: ObservableObject {
         isPasswordHidden.toggle()
     }
     
-    func saveOutputToUserDefaults(_ response: LoginResponse) {
-        if let outputData = try? JSONEncoder().encode(response.output) {
-            UserDefaults.standard.set(outputData, forKey: "loggedInUserOutput")
-            self.redirectToHome()
-        }
-    }
-    
     func redirectToHome() {
         self.shouldNavigateToHome = true
+        print(self.shouldNavigateToHome) 
     }
 }
 
