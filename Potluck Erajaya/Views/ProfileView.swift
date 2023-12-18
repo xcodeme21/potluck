@@ -18,39 +18,107 @@ struct ProfileView: View {
                 ZStack {
                     Color.white
                         .clipShape(Circle())
-                        .frame(width: 105, height: 105)
+                        .frame(width: 82, height: 82)
                         .shadow(radius: 5)
                     Image(systemName: "person.circle.fill")
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 100, height: 100)
+                        .frame(width: 80, height: 80)
                         .clipShape(Circle())
                 }
-                .padding(.bottom, -60)
+                .padding(.top, 50)
                 .zIndex(1)
                 
                 ZStack {
                     VStack {
                         if let userData = homeViewModel.getUserDataFromUserDefaults() {
                             Text(userData.name)
-                                .font(.title)
-                                .padding(.top, 70)
+                                .font(.headline)
+                                .padding(.top, 50)
                             
-                            Text(userData.email)
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                                .padding(.top, 2)
-                                .padding(.bottom, 20)
+                            VStack(alignment: .leading, spacing: 5) {
+                                HStack {
+                                    Image(systemName: "envelope")
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 14))
+                                        .padding(.trailing, 5)
+                                    
+                                    Text(userData.email)
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                }
+                                .padding(.top,5)
+                                
+                                HStack {
+                                    Image(systemName: "person.crop.rectangle.fill")
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 14))
+                                        .padding(.trailing, 5)
+                                    
+                                    Text("202005075")
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                }
+                                .padding(.top,5)
+                                
+                                HStack {
+                                    Image(systemName: "phone.fill")
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 14))
+                                        .padding(.trailing, 5)
+                                    
+                                    Text("6285703696988")
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                }
+                                .padding(.top,5)
+                            }
+                            .padding(.top,10)
+                            .padding(.bottom,20)
                         } else {
                             Text("Name")
                                 .font(.title)
-                                .padding(.top, 70)
+                                .padding(.top, 50)
                             
-                            Text("Email")
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                                .padding(.top, 2)
-                                .padding(.bottom, 20)
+                            VStack(alignment: .leading, spacing: 5) {
+                                HStack {
+                                    Image(systemName: "envelope")
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 14))
+                                        .padding(.trailing, 5)
+                                    
+                                    Text("Email")
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                }
+                                .padding(.top,5)
+                                
+                                HStack {
+                                    Image(systemName: "person.crop.rectangle.fill")
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 14))
+                                        .padding(.trailing, 5)
+                                    
+                                    Text("202005075")
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                }
+                                .padding(.top,5)
+                                
+                                HStack {
+                                    Image(systemName: "phone.fill")
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 14))
+                                        .padding(.trailing, 5)
+                                    
+                                    Text("6285703696988")
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                }
+                                .padding(.top,5)
+                            }
+                            .padding(.top,10)
+                            .padding(.bottom,20)
                         }
                     }
                     .frame(maxWidth: .infinity)
@@ -62,7 +130,7 @@ struct ProfileView: View {
                 .padding(.bottom, 0)
                 .padding()
                 .navigationTitle("Profile")
-                .padding(.top, -20)
+                .padding(.top, -70)
 
                 
                 Spacer()
