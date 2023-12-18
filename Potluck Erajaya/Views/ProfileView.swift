@@ -11,6 +11,7 @@ import SwiftUI
 struct ProfileView: View {
     @ObservedObject var homeViewModel: HomeViewModel
     let userName = UserDefaults.standard.string(forKey: "userData_name") ?? ""
+    @State private var isBookingHistoryPresented = false
     
     var body: some View {
         NavigationView {
@@ -75,6 +76,21 @@ struct ProfileView: View {
                             }
                             .padding(.top,10)
                             .padding(.bottom,20)
+                            Divider()
+                            
+                            NavigationLink(destination: BookingHistoryView(), isActive: $isBookingHistoryPresented) {
+                                HStack {
+                                    Text("Booking History")
+                                        .font(.system(size: 16))
+                                        .foregroundColor(.gray)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.gray)
+                                        .font(.system(size: 16))
+                                }
+                                .padding()
+                            }
+
                         } else {
                             Text("Name")
                                 .font(.title)
