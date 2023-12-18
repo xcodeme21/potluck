@@ -12,20 +12,20 @@ struct HomeView: View {
     
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, kamu berhasil login!")
-            Button(action: {
-                homeViewModel.logout()
-            }) {
-                Text("Logout")
-                    .padding()
-                    .foregroundColor(.white)
-                    .background(Color.red)
-                    .cornerRadius(8)
-            }
-            .padding()
+            TabView {
+                EventView()
+                            .tabItem {
+                                Label("Event", systemImage: "calendar")
+                            }
+                            .tag(0)
+                        
+                        ProfileView(homeViewModel: homeViewModel)
+                            .tabItem {
+                                Label("Profile", systemImage: "person")
+                            }
+                            .tag(1)
+                    }
+
         }
         .padding()
     }
