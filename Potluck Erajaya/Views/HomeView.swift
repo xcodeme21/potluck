@@ -14,17 +14,17 @@ struct HomeView: View {
         VStack {
             TabView {
                 EventView()
-                            .tabItem {
-                                Label("Event", systemImage: "calendar")
-                            }
-                            .tag(0)
-                        
-                        ProfileView(homeViewModel: homeViewModel)
-                            .tabItem {
-                                Label("Profile", systemImage: "person")
-                            }
-                            .tag(1)
+                    .tabItem {
+                        Label("Event", systemImage: "calendar")
                     }
+                    .tag(0)
+                
+                ProfileView(homeViewModel: homeViewModel)
+                    .tabItem {
+                        Label("Profile", systemImage: "person")
+                    }
+                    .tag(1)
+            }
 
         }
         .padding()
