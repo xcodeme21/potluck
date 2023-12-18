@@ -14,6 +14,7 @@
 		764828C42B2C394E00F8A131 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764828C32B2C394E00F8A131 /* SplashScreenView.swift */; };
 		764828C62B2C3C4600F8A131 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 764828C52B2C3C4600F8A131 /* Launch Screen.storyboard */; };
 		764828CA2B2C3D4B00F8A131 /* splashscreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 764828C92B2C3D4B00F8A131 /* splashscreen.jpg */; };
+		764828CC2B2C5A4700F8A131 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764828CB2B2C5A4700F8A131 /* HomeViewModel.swift */; };
 		76770A5C2B28546700389C80 /* Potluck_ErajayaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76770A5B2B28546700389C80 /* Potluck_ErajayaApp.swift */; };
 		76770A5E2B28546700389C80 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76770A5D2B28546700389C80 /* ContentView.swift */; };
 		76770A602B28546900389C80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76770A5F2B28546900389C80 /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 		764828C32B2C394E00F8A131 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		764828C52B2C3C4600F8A131 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		764828C92B2C3D4B00F8A131 /* splashscreen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = splashscreen.jpg; path = ../../../../../../Users/agussiswanto/Downloads/splashscreen.jpg; sourceTree = "<group>"; };
+		764828CB2B2C5A4700F8A131 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		76770A582B28546700389C80 /* Potluck Erajaya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Potluck Erajaya.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76770A5B2B28546700389C80 /* Potluck_ErajayaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Potluck_ErajayaApp.swift; sourceTree = "<group>"; };
 		76770A5D2B28546700389C80 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				764828BF2B2BF71D00F8A131 /* LoginViewModel.swift */,
+				764828CB2B2C5A4700F8A131 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				76770A862B28548A00389C80 /* HomeView.swift in Sources */,
+				764828CC2B2C5A4700F8A131 /* HomeViewModel.swift in Sources */,
 				764828C22B2BF84B00F8A131 /* LoginView.swift in Sources */,
 				76770A5E2B28546700389C80 /* ContentView.swift in Sources */,
 				764828C02B2BF71D00F8A131 /* LoginViewModel.swift in Sources */,

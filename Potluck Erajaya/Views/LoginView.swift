@@ -11,7 +11,7 @@ struct LoginView: View {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 100, height: 100)
+                        .frame(width: 120, height: 120)
                         .foregroundColor(.blue)
                         .padding()
                 case .failure(_):
@@ -104,11 +104,6 @@ struct LoginView: View {
         }
         .padding(.bottom, 0)
         .padding()
-        
-        NavigationLink(destination: HomeView(), isActive: $viewModel.shouldNavigateToHome) {
-            EmptyView()
-        }
-        .hidden()
     }
 }
 

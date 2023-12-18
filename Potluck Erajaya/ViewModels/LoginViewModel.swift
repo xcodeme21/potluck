@@ -63,6 +63,7 @@ class LoginViewModel: ObservableObject {
                                                     username: outputData.username,
                                                     yourIP: outputData.yourIP)
                             self.saveOutputToUserDefaults(userData)
+                            self.shouldNavigateToHome = true 
                         }
                     } else {
                         self.showAlert = true
@@ -77,7 +78,6 @@ class LoginViewModel: ObservableObject {
     func saveOutputToUserDefaults(_ response: UserData) {
         if let outputData = try? JSONEncoder().encode(response) {
             UserDefaults.standard.set(outputData, forKey: "userData")
-            self.redirectToHome()
         }
     }
     
@@ -85,9 +85,5 @@ class LoginViewModel: ObservableObject {
         isPasswordHidden.toggle()
     }
     
-    func redirectToHome() {
-        self.shouldNavigateToHome = true
-        print(self.shouldNavigateToHome) 
-    }
 }
 
