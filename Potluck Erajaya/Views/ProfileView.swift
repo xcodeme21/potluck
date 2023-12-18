@@ -154,7 +154,7 @@ struct ProfileView: View {
                 Button(action: {
                     homeViewModel.logout()
                 }) {
-                    Text("Logout")
+                    Text("Sign Out")
                         .foregroundColor(.red)
                         .frame(maxWidth: .infinity)
                         .frame(height: 10)
