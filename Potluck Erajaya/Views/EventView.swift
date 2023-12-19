@@ -19,6 +19,8 @@ struct EventView: View {
 }
 
 struct CardView: View {
+    @State private var isToDetailEvent = false
+    
     var body: some View {
         HStack(spacing: 12) {
             // Image on the left
@@ -63,14 +65,17 @@ struct CardView: View {
                 
                 Divider()
                 
-                HStack {
-                    Text("Detail")
-                        .font(.footnote)
-                        .foregroundColor(.gray)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.gray)
-                        .font(.system(size: 16))
+                
+                NavigationLink(destination: DetailEventView(), isActive: $isToDetailEvent) {
+                    HStack {
+                        Text("Detail")
+                            .font(.footnote)
+                            .foregroundColor(.gray)
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 16))
+                    }
                 }
             }
             .padding(.trailing, 8)

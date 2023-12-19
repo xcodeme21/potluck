@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		760C8BE82B31443B00B8412D /* DetailEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C8BE72B31443B00B8412D /* DetailEventView.swift */; };
 		764828BB2B2BF55800F8A131 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764828BA2B2BF55800F8A131 /* LoginResponse.swift */; };
 		764828BE2B2BF5F000F8A131 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764828BD2B2BF5F000F8A131 /* LoginService.swift */; };
 		764828C02B2BF71D00F8A131 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764828BF2B2BF71D00F8A131 /* LoginViewModel.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		760C8BE72B31443B00B8412D /* DetailEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEventView.swift; sourceTree = "<group>"; };
 		764828BA2B2BF55800F8A131 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		764828BD2B2BF5F000F8A131 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		764828BF2B2BF71D00F8A131 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 			children = (
 				76770A852B28548A00389C80 /* HomeView.swift */,
 				76C5A2392B30392E003487BD /* BookingHistoryView.swift */,
+				760C8BE72B31443B00B8412D /* DetailEventView.swift */,
 				76C5A2352B2FF525003487BD /* EventView.swift */,
 				76C5A2372B2FF54C003487BD /* ProfileView.swift */,
 				764828C32B2C394E00F8A131 /* SplashScreenView.swift */,
@@ -352,6 +355,7 @@
 				76770A5E2B28546700389C80 /* ContentView.swift in Sources */,
 				764828C02B2BF71D00F8A131 /* LoginViewModel.swift in Sources */,
 				76C5A23A2B30392E003487BD /* BookingHistoryView.swift in Sources */,
+				760C8BE82B31443B00B8412D /* DetailEventView.swift in Sources */,
 				764828BE2B2BF5F000F8A131 /* LoginService.swift in Sources */,
 				764828BB2B2BF55800F8A131 /* LoginResponse.swift in Sources */,
 				76770A5C2B28546700389C80 /* Potluck_ErajayaApp.swift in Sources */,

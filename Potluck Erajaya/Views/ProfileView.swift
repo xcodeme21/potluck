@@ -10,7 +10,6 @@ import SwiftUI
 
 struct ProfileView: View {
     @ObservedObject var homeViewModel: HomeViewModel
-    let userName = UserDefaults.standard.string(forKey: "userData_name") ?? ""
     @State private var isBookingHistoryPresented = false
     
     var body: some View {
