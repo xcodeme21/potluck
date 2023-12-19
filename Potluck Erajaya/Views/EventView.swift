@@ -52,6 +52,7 @@ struct CardView: View {
                     .padding(.vertical, 2)
                     .background(Color.red)
                     .clipShape(RoundedCorner(corner: [.topLeft, .bottomRight], radius: 10))
+                    .padding(.bottom, 10)
                 
                 
                 HStack {
