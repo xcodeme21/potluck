@@ -30,8 +30,8 @@ struct CardView: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 100, height: 130)
                     .clipShape(RoundedCorner(corner: [.topLeft, .bottomLeft], radius: 10))
-                    .padding(.top, -50)
-                    .padding(.bottom, -50)
+                    .padding(.top, -40)
+                    .padding(.bottom, -40)
             } placeholder: {
                 // Placeholder view saat gambar sedang dimuat
                 ProgressView()
