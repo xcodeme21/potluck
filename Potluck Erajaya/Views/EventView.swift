@@ -43,6 +43,7 @@ struct CardView: View {
                 Text("Potluck Ibox")
                     .font(.headline)
                     .foregroundColor(.primary)
+                    .textCase(.uppercase)
                 
                 Text("Ended")
                     .font(.caption2)
