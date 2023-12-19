@@ -76,6 +76,8 @@ struct ProfileView: View {
                             }
                             .padding(.top,10)
                             .padding(.bottom,20)
+                            .padding(.leading, -75)
+                            
                             Divider()
                             
                             NavigationLink(destination: BookingHistoryView(), isActive: $isBookingHistoryPresented) {
