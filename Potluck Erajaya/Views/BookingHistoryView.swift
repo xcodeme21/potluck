@@ -10,7 +10,9 @@ import SwiftUI
 
 struct BookingHistoryView: View {
     var body: some View {
-        Text("Booking History Page")
+        VStack{
+            Text("Booking History Page")
+        }
         .navigationTitle("Booking History")
     }
 }

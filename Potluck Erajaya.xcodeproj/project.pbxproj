@@ -26,6 +26,7 @@
 		76C5A2362B2FF525003487BD /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C5A2352B2FF525003487BD /* EventView.swift */; };
 		76C5A2382B2FF54C003487BD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C5A2372B2FF54C003487BD /* ProfileView.swift */; };
 		76C5A23A2B30392E003487BD /* BookingHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C5A2392B30392E003487BD /* BookingHistoryView.swift */; };
+		76C5A23C2B30A576003487BD /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C5A23B2B30A576003487BD /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		76C5A2352B2FF525003487BD /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		76C5A2372B2FF54C003487BD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		76C5A2392B30392E003487BD /* BookingHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingHistoryView.swift; sourceTree = "<group>"; };
+		76C5A23B2B30A576003487BD /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Helpers.swift; path = "Potluck Erajaya/Views/Helpers.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 		764828B92B2BF44A00F8A131 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				76C5A23B2B30A576003487BD /* Helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				764828BB2B2BF55800F8A131 /* LoginResponse.swift in Sources */,
 				76770A5C2B28546700389C80 /* Potluck_ErajayaApp.swift in Sources */,
 				764828C42B2C394E00F8A131 /* SplashScreenView.swift in Sources */,
+				76C5A23C2B30A576003487BD /* Helpers.swift in Sources */,
 				76C5A2382B2FF54C003487BD /* ProfileView.swift in Sources */,
 				76C5A2362B2FF525003487BD /* EventView.swift in Sources */,
 			);
