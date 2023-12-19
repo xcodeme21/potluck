@@ -22,6 +22,7 @@ struct DetailEventView: View {
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: UIScreen.main.bounds.width)
                                         .clipped()
+                                        .overlay(Color.black.opacity(0.3))
                                 } else if phase.error != nil {
                                     Image(systemName: "photo")
                                         .resizable()
@@ -72,11 +73,7 @@ struct DetailEventView: View {
                         .padding(.bottom, 10)
                 }
                 .padding(.horizontal, 15)
-                
-                
-                
             }
-            .navigationBarHidden(true)
         }
     }
 }
@@ -109,3 +106,4 @@ struct DetailEventView_Previews: PreviewProvider {
         return DetailEventView()
     }
 }
+
