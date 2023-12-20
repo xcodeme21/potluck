@@ -28,7 +28,7 @@ struct CardView: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 100, height: 130)
+                    .frame(width: 120, height: 130)
                     .clipShape(RoundedCorner(corner: [.topLeft, .bottomLeft], radius: 10))
                     .padding(.top, -40)
                     .padding(.bottom, -40)
