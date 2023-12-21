@@ -33,11 +33,9 @@ struct CardView: View {
                     .padding(.top, -40)
                     .padding(.bottom, -40)
             } placeholder: {
-                // Placeholder view saat gambar sedang dimuat
                 ProgressView()
             }
             
-            // Details on the right
             VStack(alignment: .leading, spacing: 8) {
                 
                 Text("Potluck Ibox")

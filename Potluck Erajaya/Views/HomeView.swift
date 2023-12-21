@@ -25,7 +25,19 @@ struct HomeView: View {
                     }
                     .tag(1)
             }
-
+            .onAppear {
+                if let userData = homeViewModel.getUserDataFromUserDefaults() {
+                    homeViewModel.checkCompletion(email: userData.email, authorizationHeader: "Basic cG90bHVjazokMmEkMTJOcDB0VVRXMzR2ejZaNTV0TUxUbWMuMzBWNkNLWUlLNlNCN25IOU1TWkZ5a0xzQ3YycWlpNg==")
+                }
+            }
+            .onReceive(homeViewModel.$isVerified) { shouldVerified in
+                if !shouldVerified {
+                    homeViewModel.isVerified = true
+                }
+            }
+            .onAppear {
+                print(homeViewModel.isVerified)
+            }
         }
     }
 }

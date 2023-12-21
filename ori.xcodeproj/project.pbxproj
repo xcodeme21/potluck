@@ -28,6 +28,8 @@
 		76C5A2382B2FF54C003487BD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C5A2372B2FF54C003487BD /* ProfileView.swift */; };
 		76C5A23A2B30392E003487BD /* BookingHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C5A2392B30392E003487BD /* BookingHistoryView.swift */; };
 		76C5A23C2B30A576003487BD /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C5A23B2B30A576003487BD /* Helpers.swift */; };
+		76D6D7EA2B33DDDD002CA521 /* HomeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D6D7E92B33DDDD002CA521 /* HomeService.swift */; };
+		76D6D7EC2B33E0B7002CA521 /* HomeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76D6D7EB2B33E0B7002CA521 /* HomeResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,8 @@
 		76C5A2372B2FF54C003487BD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		76C5A2392B30392E003487BD /* BookingHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookingHistoryView.swift; sourceTree = "<group>"; };
 		76C5A23B2B30A576003487BD /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Helpers.swift; path = "Potluck Erajaya/Views/Helpers.swift"; sourceTree = SOURCE_ROOT; };
+		76D6D7E92B33DDDD002CA521 /* HomeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeService.swift; sourceTree = "<group>"; };
+		76D6D7EB2B33E0B7002CA521 /* HomeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				764828BA2B2BF55800F8A131 /* LoginResponse.swift */,
+				76D6D7EB2B33E0B7002CA521 /* HomeResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				764828BD2B2BF5F000F8A131 /* LoginService.swift */,
+				76D6D7E92B33DDDD002CA521 /* HomeService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -354,10 +360,12 @@
 				764828C22B2BF84B00F8A131 /* LoginView.swift in Sources */,
 				76770A5E2B28546700389C80 /* ContentView.swift in Sources */,
 				764828C02B2BF71D00F8A131 /* LoginViewModel.swift in Sources */,
+				76D6D7EC2B33E0B7002CA521 /* HomeResponse.swift in Sources */,
 				76C5A23A2B30392E003487BD /* BookingHistoryView.swift in Sources */,
 				760C8BE82B31443B00B8412D /* DetailEventView.swift in Sources */,
 				764828BE2B2BF5F000F8A131 /* LoginService.swift in Sources */,
 				764828BB2B2BF55800F8A131 /* LoginResponse.swift in Sources */,
+				76D6D7EA2B33DDDD002CA521 /* HomeService.swift in Sources */,
 				76770A5C2B28546700389C80 /* Potluck_ErajayaApp.swift in Sources */,
 				764828C42B2C394E00F8A131 /* SplashScreenView.swift in Sources */,
 				76C5A23C2B30A576003487BD /* Helpers.swift in Sources */,
@@ -451,7 +459,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -508,7 +516,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

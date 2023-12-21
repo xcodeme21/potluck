@@ -11,6 +11,13 @@ import Combine
 class HomeViewModel: ObservableObject {
     @Published var isLoggedIn: Bool = false
     @Published var shouldNavigateToHome = false
+    @Published var isVerified: Bool = false
+    
+    private var homeService: HomeService
+    
+    init(homeService: HomeService = HomeService()) {
+        self.homeService = homeService
+    }
         
     func logout() {
         UserDefaults.standard.removeObject(forKey: "userData")
@@ -25,5 +32,25 @@ class HomeViewModel: ObservableObject {
         }
         return nil
     }
+    
+    func checkCompletion(email: String, authorizationHeader: String) {
+        homeService.checkCompletionService(email: email, authorizationHeader: authorizationHeader) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let response):
+                if let isVerified = response.data?.is_verified {
+                    self.isVerified = isVerified
+                } else {
+                    self.isVerified = false
+                }
+
+            case .failure(let error):
+                print("Check completion failed with error: \(error)")
+            }
+        }
+    }
+
+
 
 }
