@@ -33,23 +33,23 @@ class HomeViewModel: ObservableObject {
         return nil
     }
     
-    func checkCompletion(email: String, authorizationHeader: String) {
+    func checkCompletion(email: String, authorizationHeader: String, completion: @escaping (Result<Bool, Error>) -> Void) {
         homeService.checkCompletionService(email: email, authorizationHeader: authorizationHeader) { [weak self] result in
             guard let self = self else { return }
 
             switch result {
             case .success(let response):
-                if let isVerified = response.data?.is_verified {
-                    self.isVerified = isVerified
-                } else {
-                    self.isVerified = false
-                }
+                let isVerified = response.data?.is_verified ?? false
+                self.isVerified = isVerified
+                completion(.success(isVerified))
 
             case .failure(let error):
                 print("Check completion failed with error: \(error)")
+                completion(.failure(error))
             }
         }
     }
+
 
 
 

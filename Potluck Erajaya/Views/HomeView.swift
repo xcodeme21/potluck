@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var homeViewModel: HomeViewModel
+    @State private var showModal = false
     
     var body: some View {
         VStack {
@@ -27,17 +28,21 @@ struct HomeView: View {
             }
             .onAppear {
                 if let userData = homeViewModel.getUserDataFromUserDefaults() {
-                    homeViewModel.checkCompletion(email: userData.email, authorizationHeader: "Basic cG90bHVjazokMmEkMTJOcDB0VVRXMzR2ejZaNTV0TUxUbWMuMzBWNkNLWUlLNlNCN25IOU1TWkZ5a0xzQ3YycWlpNg==")
+                    homeViewModel.checkCompletion(email: userData.email, authorizationHeader: "Basic cG90bHVjazokMmEkMTJOcDB0VVRXMzR2ejZaNTV0TUxUbWMuMzBWNkNLWUlLNlNCN25IOU1TWkZ5a0xzQ3YycWlpNg==") { result in
+                        switch result {
+                        case .success(let isVerified):
+                            if isVerified {
+                                homeViewModel.isVerified = true
+                                showModal = true
+                            }
+
+                        case .failure(let error):
+                            print("Check completion failed with error: \(error)")
+                        }
+                    }
                 }
             }
-            .onReceive(homeViewModel.$isVerified) { shouldVerified in
-                if !shouldVerified {
-                    homeViewModel.isVerified = true
-                }
-            }
-            .onAppear {
-                print(homeViewModel.isVerified)
-            }
+
         }
     }
 }
