@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var homeViewModel: HomeViewModel
-    @State private var showModal = false
     
     var body: some View {
         VStack {
@@ -32,10 +31,9 @@ struct HomeView: View {
                         switch result {
                         case .success(let isVerified):
                             if !isVerified {
-                                print(isVerified, "fetch isVerified")
-                                showModal = true // Show the modal when isVerified is false
+                                homeViewModel.showModal = true
                             }
-                            homeViewModel.isVerified = isVerified // Update isVerified
+                            homeViewModel.isVerified = isVerified
 
                         case .failure(let error):
                             print("Check completion failed with error: \(error)")
@@ -43,13 +41,13 @@ struct HomeView: View {
                     }
                 }
             }
-            .sheet(isPresented: $showModal) {
-                ModalFormView(showModal: $showModal, homeViewModel: homeViewModel)
+            .sheet(isPresented: $homeViewModel.showModal) {
+                ModalFormView(homeViewModel: homeViewModel)
             }
-            .onAppear {
-                print(homeViewModel.isVerified, "is isVerified")
-                print(showModal, "is showModal")
-            }
+//            .onAppear {
+//                print(homeViewModel.isVerified, "is isVerified")
+//                print(showModal, "is showModal")
+//            }
         }
     }
 }
@@ -62,12 +60,7 @@ struct HomeView_Previews: PreviewProvider {
 }
 
 struct ModalFormView: View {
-    @Binding var showModal: Bool
-    @State var whatsappNumber: Double?
-    @State var nik: Double?
     @FocusState private var isFocused: Bool
-    @State private var isWhastappValid: Bool = false
-    @State private var isNikValid: Bool = false
     @ObservedObject var homeViewModel: HomeViewModel
 
     var body: some View {
@@ -134,17 +127,31 @@ struct ModalFormView: View {
                 Spacer()
                 
                 Button(action: {
-                            }) {
-                                Text("Login")
-                                    .frame(maxWidth: .infinity)
-                                    .padding(.vertical, 15)
-                                    .font(.headline)
-                                    .foregroundColor(.white)
-                                    .background(homeViewModel.isValidCredentials ? Color.blue : Color.gray)
-                                    .cornerRadius(8)
+                    if let userData = homeViewModel.getUserDataFromUserDefaults() {
+                        homeViewModel.updateProfile(email: userData.email, authorizationHeader: "Basic cG90bHVjazokMmEkMTJOcDB0VVRXMzR2ejZaNTV0TUxUbWMuMzBWNkNLWUlLNlNCN25IOU1TWkZ5a0xzQ3YycWlpNg==") { result in
+                            switch result {
+                            case .success(let data):
+                                print("result akhir data", data)
+
+                            case .failure(let error):
+                                print("Check completion failed with error: \(error)")
                             }
-                            .padding(.top,10)
-                            .disabled(!homeViewModel.isValidCredentials)
+                        }
+                    }
+                }) {
+                    Text("Login")
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 15)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .background(homeViewModel.isValidCredentials ? Color.blue : Color.gray)
+                        .cornerRadius(8)
+                }
+                .padding(.top,10)
+                .disabled(!homeViewModel.isValidCredentials)
+                .alert(isPresented: $homeViewModel.showAlert) {
+                            Alert(title: Text("Submit failed"), message: Text("Please check your nik and number whatsapp."), dismissButton: .default(Text("OK")))
+                        }
             }
             .padding()
             .background(Color.white)

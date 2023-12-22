@@ -65,6 +65,48 @@ class HomeService {
             }
         }.resume()
     }
+    
+    func updateUserService(email: String, phone: String, nik: String, authorizationHeader: String, completion: @escaping (Result<UpdateUserResponse, Error>) -> Void) {
+        let urlString = "https://potluck.eraspace.com/api/potluck/profile/update?email=\(email)"
+        let url = URL(string: urlString)!
+
+        let parameters: [String: Any] = [
+            "phone": phone,
+            "nik": nik
+        ]
+
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: parameters) else {
+            print("Error creating JSON data")
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(authorizationHeader, forHTTPHeaderField: "Authorization")
+        request.httpBody = jsonData
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            if let data = data {
+                if let responseString = String(data: data, encoding: .utf8) {
+                    print("Response data: \(responseString)")
+                }
+                do {
+                    let response = try JSONDecoder().decode(UpdateUserResponse.self, from: data)
+                    completion(.success(response))
+                } catch {
+                    print("Error decoding response: \(error)")
+                    completion(.failure(error))
+                }
+            }
+        }.resume()
+    }
+
 
 
 

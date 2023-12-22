@@ -13,11 +13,11 @@ struct UpdateUserResponse: Codable {
     let status: Int
     
     struct UserData: Codable {
-        let id: String?
+        let id: Int?
         let name: String?
         let email: String?
-        let nik: String?
-        let phone: String?
+        let nik: Int?
+        let phone: Int?
     }
 }
 

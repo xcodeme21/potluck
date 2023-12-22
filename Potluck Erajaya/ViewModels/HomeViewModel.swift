@@ -14,6 +14,8 @@ class HomeViewModel: ObservableObject {
     @Published var isVerified: Bool = false
     @Published var nik: String = ""
     @Published var phone: String = ""
+    @Published var showAlert: Bool = false
+    @Published var showModal: Bool = false
     
     private var homeService: HomeService
     
@@ -55,13 +57,42 @@ class HomeViewModel: ObservableObject {
     var isValidCredentials: Bool {
         return isValidPhone(phone) && isValidNik(nik)
     }
-
     func isValidPhone(_ phone: String) -> Bool {
         return phone.count <= 12 && phone.count > 6 && phone.hasPrefix("8")
     }
 
     func isValidNik(_ nik: String) -> Bool {
         return nik.count == 9
+    }
+
+
+
+    
+    func updateProfile(email: String, authorizationHeader: String, completion: @escaping (Result<UpdateUserResponse, Error>) -> Void) {
+        if let userData = getUserDataFromUserDefaults() {
+            let phone = self.phone
+            let nik = self.nik
+            
+            homeService.updateUserService(email: userData.email, phone: phone, nik: nik, authorizationHeader: authorizationHeader) { [weak self] result in
+                guard let self = self else { return }
+
+                switch result {
+                case .success(let response):
+                    if response.data?.email == nil || response.data?.name == nil || response.data?.id == nil {
+                        self.showAlert = true
+                    } else {
+                        self.showAlert = false
+                        self.showModal = false
+                        completion(.success(response))
+                    }
+
+
+                case .failure(let error):
+                    print("Check completion failed with error: \(error)")
+                    completion(.failure(error))
+                }
+            }
+        }
     }
 
 

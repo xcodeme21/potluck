@@ -52,7 +52,6 @@ class LoginViewModel: ObservableObject {
                 switch result {
                 case .success(let response):
                     self.loginResponse = response
-                    print(response)
                     if response.success == true {
                         if let outputData = response.output {
                             let userData = UserData(email: outputData.email,
