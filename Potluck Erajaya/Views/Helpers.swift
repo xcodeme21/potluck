@@ -32,3 +32,10 @@ struct RoundedCorner: Shape {
     }
 }
 
+
+let formatterToInt: NumberFormatter = {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    return formatter
+}()
+

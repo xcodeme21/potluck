@@ -12,6 +12,8 @@ class HomeViewModel: ObservableObject {
     @Published var isLoggedIn: Bool = false
     @Published var shouldNavigateToHome = false
     @Published var isVerified: Bool = false
+    @Published var nik: String = ""
+    @Published var phone: String = ""
     
     private var homeService: HomeService
     
@@ -49,8 +51,18 @@ class HomeViewModel: ObservableObject {
             }
         }
     }
+    
+    var isValidCredentials: Bool {
+        return isValidPhone(phone) && isValidNik(nik)
+    }
 
+    func isValidPhone(_ phone: String) -> Bool {
+        return phone.count <= 12 && phone.count > 6 && phone.hasPrefix("8")
+    }
 
+    func isValidNik(_ nik: String) -> Bool {
+        return nik.count == 9
+    }
 
 
 }
