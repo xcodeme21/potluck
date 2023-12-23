@@ -2,6 +2,7 @@ import SwiftUI
 
 struct LoginView: View {
     @ObservedObject var viewModel: LoginViewModel
+    @FocusState private var isFocused: Bool
     
     var body: some View {
         VStack {
@@ -33,6 +34,10 @@ struct LoginView: View {
                            .frame(height: 50)
                            .padding(.horizontal)
                            .autocapitalization(.none)
+                           .focused($isFocused)
+                           .onAppear {
+                               self.isFocused = true
+                           }
 
             HStack {
                             if viewModel.isPasswordHidden {
