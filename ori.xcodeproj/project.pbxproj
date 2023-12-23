@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		760C8BE82B31443B00B8412D /* DetailEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C8BE72B31443B00B8412D /* DetailEventView.swift */; };
+		7611B6342B36AF5000EBB557 /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7611B6332B36AF5000EBB557 /* ProfileResponse.swift */; };
+		7611B6362B36B08800EBB557 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7611B6352B36B08800EBB557 /* ProfileViewModel.swift */; };
+		7611B6382B36B15D00EBB557 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7611B6372B36B15D00EBB557 /* ProfileService.swift */; };
 		764828BB2B2BF55800F8A131 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764828BA2B2BF55800F8A131 /* LoginResponse.swift */; };
 		764828BE2B2BF5F000F8A131 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764828BD2B2BF5F000F8A131 /* LoginService.swift */; };
 		764828C02B2BF71D00F8A131 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764828BF2B2BF71D00F8A131 /* LoginViewModel.swift */; };
@@ -51,6 +54,9 @@
 
 /* Begin PBXFileReference section */
 		760C8BE72B31443B00B8412D /* DetailEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEventView.swift; sourceTree = "<group>"; };
+		7611B6332B36AF5000EBB557 /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
+		7611B6352B36B08800EBB557 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		7611B6372B36B15D00EBB557 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		764828BA2B2BF55800F8A131 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		764828BD2B2BF5F000F8A131 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		764828BF2B2BF71D00F8A131 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -108,6 +114,7 @@
 			children = (
 				764828BA2B2BF55800F8A131 /* LoginResponse.swift */,
 				76D6D7EB2B33E0B7002CA521 /* HomeResponse.swift */,
+				7611B6332B36AF5000EBB557 /* ProfileResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -131,6 +138,7 @@
 			children = (
 				764828BF2B2BF71D00F8A131 /* LoginViewModel.swift */,
 				764828CB2B2C5A4700F8A131 /* HomeViewModel.swift */,
+				7611B6352B36B08800EBB557 /* ProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -140,6 +148,7 @@
 			children = (
 				764828BD2B2BF5F000F8A131 /* LoginService.swift */,
 				76D6D7E92B33DDDD002CA521 /* HomeService.swift */,
+				7611B6372B36B15D00EBB557 /* ProfileService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -355,6 +364,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7611B6342B36AF5000EBB557 /* ProfileResponse.swift in Sources */,
 				76770A862B28548A00389C80 /* HomeView.swift in Sources */,
 				764828CC2B2C5A4700F8A131 /* HomeViewModel.swift in Sources */,
 				764828C22B2BF84B00F8A131 /* LoginView.swift in Sources */,
@@ -366,7 +376,9 @@
 				764828BE2B2BF5F000F8A131 /* LoginService.swift in Sources */,
 				764828BB2B2BF55800F8A131 /* LoginResponse.swift in Sources */,
 				76D6D7EA2B33DDDD002CA521 /* HomeService.swift in Sources */,
+				7611B6362B36B08800EBB557 /* ProfileViewModel.swift in Sources */,
 				76770A5C2B28546700389C80 /* Potluck_ErajayaApp.swift in Sources */,
+				7611B6382B36B15D00EBB557 /* ProfileService.swift in Sources */,
 				764828C42B2C394E00F8A131 /* SplashScreenView.swift in Sources */,
 				76C5A23C2B30A576003487BD /* Helpers.swift in Sources */,
 				76C5A2382B2FF54C003487BD /* ProfileView.swift in Sources */,

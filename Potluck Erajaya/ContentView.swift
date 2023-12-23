@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @StateObject private var viewModel = LoginViewModel()
     @StateObject private var homeModel = HomeViewModel()
+    @StateObject private var profileModel = ProfileViewModel()
     
     var body: some View {
         let hasUserData = UserDefaults.standard.data(forKey: "userData").flatMap {
@@ -10,7 +11,7 @@ struct ContentView: View {
         } != nil
         
         if hasUserData {
-            HomeView(homeViewModel: homeModel)
+            HomeView(homeViewModel: homeModel, profileViewModel: profileModel)
                 .onReceive(homeModel.$shouldNavigateToHome) { shouldNavigate in
                     if !shouldNavigate {
                         homeModel.isLoggedIn = false

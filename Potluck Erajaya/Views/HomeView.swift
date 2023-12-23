@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var profileViewModel: ProfileViewModel
     
     var body: some View {
         VStack {
@@ -19,7 +20,7 @@ struct HomeView: View {
                     }
                     .tag(0)
                 
-                ProfileView(homeViewModel: homeViewModel)
+                ProfileView(homeViewModel: homeViewModel, profileViewModel: profileViewModel)
                     .tabItem {
                         Label("Profile", systemImage: "person")
                     }
@@ -54,8 +55,9 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        let homeViewModel = HomeViewModel() 
-        return HomeView(homeViewModel: homeViewModel)
+        let homeViewModel = HomeViewModel()
+        let profileViewModel = ProfileViewModel() 
+        return HomeView(homeViewModel: homeViewModel, profileViewModel: profileViewModel)
     }
 }
 

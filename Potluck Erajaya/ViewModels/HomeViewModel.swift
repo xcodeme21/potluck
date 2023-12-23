@@ -64,9 +64,6 @@ class HomeViewModel: ObservableObject {
     func isValidNik(_ nik: String) -> Bool {
         return nik.count == 9
     }
-
-
-
     
     func updateProfile(email: String, authorizationHeader: String, completion: @escaping (Result<UpdateUserResponse, Error>) -> Void) {
         if let userData = getUserDataFromUserDefaults() {

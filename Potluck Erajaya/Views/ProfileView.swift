@@ -10,7 +10,9 @@ import SwiftUI
 
 struct ProfileView: View {
     @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var profileViewModel: ProfileViewModel
     @State private var isBookingHistoryPresented = false
+    @State private var userProfile: ProfileResponse?
     
     var body: some View {
         NavigationView {
@@ -49,29 +51,9 @@ struct ProfileView: View {
                                 }
                                 .padding(.top,5)
                                 
-                                HStack {
-                                    Image(systemName: "person.crop.rectangle.fill")
-                                        .foregroundColor(.gray)
-                                        .font(.system(size: 14))
-                                        .padding(.trailing, 5)
-                                    
-                                    Text("202005075")
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
+                                if let userProfile = userProfile {
+                                    ProfileDataView(profile: userProfile)
                                 }
-                                .padding(.top,5)
-                                
-                                HStack {
-                                    Image(systemName: "phone.fill")
-                                        .foregroundColor(.gray)
-                                        .font(.system(size: 14))
-                                        .padding(.trailing, 5)
-                                    
-                                    Text("6285703696988")
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
-                                }
-                                .padding(.top,5)
                             }
                             .padding(.top,10)
                             .padding(.bottom,20)
@@ -170,7 +152,66 @@ struct ProfileView: View {
                 .padding(.horizontal, 15)
             }
         }
+        .onAppear {
+            if let userData = homeViewModel.getUserDataFromUserDefaults() {
+                profileViewModel.getProfile(email: userData.email, authorizationHeader: "Basic cG90bHVjazokMmEkMTJOcDB0VVRXMzR2ejZaNTV0TUxUbWMuMzBWNkNLWUlLNlNCN25IOU1TWkZ5a0xzQ3YycWlpNg==") { result in
+                    switch result {
+                    case .success(let data):
+                        print(data)
+                        self.userProfile = data
+                        
+                    case .failure(let error):
+                        print("Fetching profile failed with error: \(error)")
+                    }
+                }
+            }
+        }
     }
 }
 
-
+struct ProfileDataView: View {
+    let profile: ProfileResponse
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            HStack {
+                Image(systemName: "person.crop.rectangle.fill")
+                    .foregroundColor(.gray)
+                    .font(.system(size: 14))
+                    .padding(.trailing, 5)
+                
+                if let nik = profile.data?.nik {
+                    let nikString = String(nik).replacingOccurrences(of: ".", with: "")
+                    Text("\(nikString)")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                } else {
+                    Text("NIK not available")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
+            }
+            .padding(.top, 5)
+            
+            HStack {
+                Image(systemName: "phone.fill")
+                    .foregroundColor(.gray)
+                    .font(.system(size: 14))
+                    .padding(.trailing, 5)
+                
+                if let phone = profile.data?.phone {
+                    let phoneString = String(phone).replacingOccurrences(of: ".", with: "")
+                    Text("\(phoneString)")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                } else {
+                    Text("Phone number not available")
+                        .font(.subheadline)
+                        .foregroundColor(.gray)
+                }
+            }
+            .padding(.top, 5)
+        }
+        .padding(.bottom, 20)
+    }
+}
