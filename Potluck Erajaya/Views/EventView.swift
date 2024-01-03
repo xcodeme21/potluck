@@ -54,10 +54,10 @@ struct CardView: View {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 120, height: 150)
+                        .frame(width: 100, height: 120)
                         .clipShape(RoundedCorner(corner: [.topLeft, .bottomLeft], radius: 10))
-                        .padding(.top, -50)
-                        .padding(.bottom, -50)
+                        .padding(.top, -40)
+                        .padding(.bottom, -40)
                 } placeholder: {
                     ProgressView()
                 }
@@ -114,10 +114,19 @@ struct CardView: View {
                         .textCase(.uppercase)
                         .padding(.top, -5)
                     
-                    DetailInfoRow(imageName: "calendar", infoText: event.start_date + " - " + event.end_date)
-                    DetailInfoRow(imageName: "clock", infoText: event.start_time + " - " + event.end_time)
-                    DetailInfoRow(imageName: "mappin", infoText: event.location)
-                    DetailInfoRow(imageName: "doc.text.magnifyingglass", infoText: "Total quota " + String(event.total_quota))
+                    HStack {
+                        VStack(spacing: 5) {
+                            DetailInfoRow(imageName: "calendar", infoText: event.start_date + " - " + event.end_date)
+                            DetailInfoRow(imageName: "clock", infoText: event.start_time + " - " + event.end_time)
+                            DetailInfoRow(imageName: "doc.text.magnifyingglass", infoText: "Total quota " + String(event.total_quota))
+                        }
+                        
+                        Spacer()
+                        
+                        Image(systemName: "chevron.right")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 36))
+                    }
                     
                     
                 }
