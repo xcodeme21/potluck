@@ -49,7 +49,7 @@ struct ListEventsResponse: Codable {
         let location: String
         let description: String
         let image: String
-        let exclude_customer: String
+        let exclude_customer: String?
         let status: Int
         let created_at: String
         let updated_at: String
@@ -80,7 +80,7 @@ struct DetailEventResponse: Codable {
         let location: String
         let description: String
         let image: String
-        let exclude_customer: String
+        let exclude_customer: String?
         let status: Int
         let created_at: String
         let updated_at: String

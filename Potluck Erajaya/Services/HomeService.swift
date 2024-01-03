@@ -9,7 +9,7 @@ import Foundation
 
 class HomeService {
     func updateUser(email: String, authorizationHeader: String, nik: Int, phone: Int, completion: @escaping (Result<UpdateUserResponse, Error>) -> Void) {
-        let urlString = "https://potluck.eraspace.com/api/potluck/profile/update?email=\(email)"
+        let urlString = "http://localhost:8000/api/potluck/profile/update?email=\(email)"
         let url = URL(string: urlString)!
         let parameters = ["nik": nik, "phone": phone]
 
@@ -42,7 +42,7 @@ class HomeService {
     }
 
     func checkCompletionService(email: String, authorizationHeader: String, completion: @escaping (Result<CheckCompletionResponse, Error>) -> Void) {
-        let urlString = "https://potluck.eraspace.com/api/potluck/profile/check-completion?email=\(email)"
+        let urlString = "http://localhost:8000/api/potluck/profile/check-completion?email=\(email)"
         let url = URL(string: urlString)!
 
         var request = URLRequest(url: url)
@@ -67,7 +67,7 @@ class HomeService {
     }
     
     func updateUserService(email: String, phone: String, nik: String, authorizationHeader: String, completion: @escaping (Result<UpdateUserResponse, Error>) -> Void) {
-        let urlString = "https://potluck.eraspace.com/api/potluck/profile/update?email=\(email)"
+        let urlString = "http://localhost:8000/api/potluck/profile/update?email=\(email)"
         let url = URL(string: urlString)!
 
         let parameters: [String: Any] = [
@@ -108,7 +108,7 @@ class HomeService {
     }
     
     func getEventsService(email: String, authorizationHeader: String, completion: @escaping (Result<ListEventsResponse, Error>) -> Void) {
-        let urlString = "https://potluck.eraspace.com/api/potluck/events?email=\(email)"
+        let urlString = "http://localhost:8000/api/potluck/events?email=\(email)"
         guard let url = URL(string: urlString) else {
             completion(.failure(ErrorMessage.invalidURL))
             return
@@ -136,7 +136,7 @@ class HomeService {
     }
     
     func getDetailEventService(email: String, authorizationHeader: String, id: Int, completion: @escaping (Result<DetailEventResponse, Error>) -> Void) {
-        var urlComponents = URLComponents(string: "https://potluck.eraspace.com/api/potluck/events/\(id)")
+        var urlComponents = URLComponents(string: "http://localhost:8000/api/potluck/events/\(id)")
         urlComponents?.queryItems = [URLQueryItem(name: "email", value: email)]
 
         guard let url = urlComponents?.url else {

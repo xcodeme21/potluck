@@ -9,7 +9,7 @@ import Foundation
 
 class ProfileService {
     func getProfileService(email: String, authorizationHeader: String, completion: @escaping (Result<ProfileResponse, Error>) -> Void) {
-        let urlString = "https://potluck.eraspace.com/api/potluck/profile?email=\(email)"
+        let urlString = "http://localhost:8000/api/potluck/profile?email=\(email)"
         guard let url = URL(string: urlString) else {
             completion(.failure(ErrorMessage.invalidURL))
             return

@@ -70,6 +70,7 @@ struct CardView: View {
                         if event.badge_end_date == true {
                             Text("Ended")
                                 .font(.system(size: 10))
+                                .frame(height: 15)
                                 .foregroundColor(.white)
                                 .padding(.horizontal, 5)
                                 .padding(.vertical, 2)
@@ -79,6 +80,7 @@ struct CardView: View {
                             if event.badge_coming_soon == true {
                                 Text("Cooming Soon")
                                     .font(.system(size: 10))
+                                    .frame(height: 15)
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 5)
                                     .padding(.vertical, 2)
@@ -89,6 +91,7 @@ struct CardView: View {
                             if event.badge_available == true {
                                 Text("Available")
                                     .font(.system(size: 10))
+                                    .frame(height: 15)
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 5)
                                     .padding(.vertical, 2)
@@ -99,6 +102,7 @@ struct CardView: View {
                             if event.badge_full_book == true {
                                 Text("Fullbook")
                                     .font(.system(size: 10))
+                                    .frame(height: 15)
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 5)
                                     .padding(.vertical, 2)

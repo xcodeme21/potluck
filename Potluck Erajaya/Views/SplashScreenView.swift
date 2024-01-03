@@ -14,7 +14,7 @@ struct SplashScreenView: View {
             VStack {
                 Spacer()
                 
-                AsyncImage(url: URL(string: "https://potluck.eraspace.com/images/logo/logo.png")) { phase in
+                AsyncImage(url: URL(string: "http://localhost:8000/images/logo/logo.png")) { phase in
                     switch phase {
                     case .success(let image):
                         image
