@@ -54,7 +54,7 @@ struct CardView: View {
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 100, height: 120)
+                        .frame(width: 120, height: 130)
                         .clipShape(RoundedCorner(corner: [.topLeft, .bottomLeft], radius: 10))
                         .padding(.top, -40)
                         .padding(.bottom, -40)
@@ -116,7 +116,6 @@ struct CardView: View {
                         .font(.headline)
                         .foregroundColor(.primary)
                         .textCase(.uppercase)
-                        .padding(.top, -5)
                     
                     HStack {
                         VStack(spacing: 5) {
