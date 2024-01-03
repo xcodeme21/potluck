@@ -11,7 +11,7 @@ class ProfileService {
     func getProfileService(email: String, authorizationHeader: String, completion: @escaping (Result<ProfileResponse, Error>) -> Void) {
         let urlString = "https://potluck.eraspace.com/api/potluck/profile?email=\(email)"
         guard let url = URL(string: urlString) else {
-            completion(.failure(ProfileError.invalidURL))
+            completion(.failure(ErrorMessage.invalidURL))
             return
         }
 

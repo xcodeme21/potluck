@@ -23,7 +23,7 @@ class ProfileViewModel: ObservableObject {
             case .success(let response):
                 if response.data?.email == nil || response.data?.name == nil || response.data?.id == nil {
                     print("Response data is incomplete")
-                    completion(.failure(ProfileError.incompleteData))
+                    completion(.failure(ErrorMessage.incompleteData))
                 } else {
                     completion(.success(response))
                 }

@@ -91,6 +91,29 @@ class HomeViewModel: ObservableObject {
             }
         }
     }
+    
+    func getEvents(email: String, authorizationHeader: String, completion: @escaping (Result<ListEventsResponse, Error>) -> Void) {
+        homeService.getEventsService(email: email, authorizationHeader: authorizationHeader) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let response):
+                if response.data == nil {
+                    print("Response data is incomplete")
+                    self.showAlert = true
+                    completion(.failure(ErrorMessage.incompleteData))
+                } else {
+                    self.showAlert = false
+                    completion(.success(response))
+                }
+
+            case .failure(let error):
+                print("Fetching profile failed with error: \(error)")
+                self.showAlert = false
+                completion(.failure(error))
+            }
+        }
+    }
 
 
 }

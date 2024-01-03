@@ -14,7 +14,7 @@ struct HomeView: View {
     var body: some View {
         VStack {
             TabView {
-                EventView()
+                EventView(homeViewModel: homeViewModel, profileViewModel: profileViewModel)
                     .tabItem {
                         Label("Event", systemImage: "calendar")
                     }

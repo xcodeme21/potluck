@@ -21,8 +21,7 @@ struct ProfileResponse: Codable {
     }
 }
 
-
-enum ProfileError: Error {
+enum ErrorMessage: Error {
     case incompleteData
     case invalidURL
     case decodingError

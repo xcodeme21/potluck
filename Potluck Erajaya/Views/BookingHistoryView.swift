@@ -119,27 +119,6 @@ struct HistoryCardView: View {
     }
 }
 
-struct DetailInfoRow: View {
-    let imageName: String
-    let infoText: String
-    
-    var body: some View {
-        HStack {
-            Image(systemName: imageName)
-                .foregroundColor(.gray)
-                .font(.caption2)
-            
-            Text(infoText)
-                .font(.caption2)
-                .foregroundColor(.gray)
-            
-            Spacer()
-        }
-    }
-}
-
-
-
 struct BookingHistoryView_Previews: PreviewProvider {
     static var previews: some View {
         return BookingHistoryView()
