@@ -12,7 +12,7 @@ struct EventView: View {
                 ScrollView {
                     VStack(spacing: 8) {
                         ForEach(events, id: \.id) { event in
-                            CardView(event: event)
+                            CardView(event: event, homeViewModel: homeViewModel)
                         }
                     }
                     .padding()
@@ -27,8 +27,6 @@ struct EventView: View {
                             if let eventData = data.data {
                                 events = eventData
                             }
-                            print(events)
-
                             errorMessage = nil
 
                         case .failure(let error):
@@ -47,11 +45,12 @@ struct EventView: View {
 struct CardView: View {
     @State private var isToDetailEvent = false
     var event: ListEventsResponse.EventData
+    @ObservedObject var homeViewModel: HomeViewModel 
     
     var body: some View {
-        NavigationLink(destination: DetailEventView(), isActive: $isToDetailEvent) {
+        NavigationLink(destination: DetailEventView(eventId: event.id), isActive: $isToDetailEvent) {
             HStack(spacing: 12) {
-                AsyncImage(url: URL(string: "https://foto.kontan.co.id/FPN05GIgN3RC-9HZEY2Ny-OLEYU=/smart/2021/02/11/1574363234p.jpg")) { image in
+                AsyncImage(url: URL(string: event.image)) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fill)

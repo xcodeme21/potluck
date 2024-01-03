@@ -114,6 +114,29 @@ class HomeViewModel: ObservableObject {
             }
         }
     }
+    
+    func getDetailEvent(email: String, authorizationHeader: String, id: Int , completion: @escaping (Result<DetailEventResponse, Error>) -> Void) {
+        homeService.getDetailEventService(email: email, authorizationHeader: authorizationHeader, id: id) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case .success(let response):
+                if response.data == nil {
+                    print("Response data is incomplete")
+                    self.showAlert = true
+                    completion(.failure(ErrorMessage.incompleteData))
+                } else {
+                    self.showAlert = false
+                    completion(.success(response))
+                }
+
+            case .failure(let error):
+                print("Fetching profile failed with error: \(error)")
+                self.showAlert = false
+                completion(.failure(error))
+            }
+        }
+    }
 
 
 }

@@ -62,4 +62,36 @@ struct ListEventsResponse: Codable {
     }
 }
 
+struct DetailEventResponse: Codable {
+    let data: EventData?
+    let error_message: String?
+    let status: Int
+    
+    struct EventData: Codable {
+        let id: Int
+        let name: String
+        let start_date: String
+        let end_date: String
+        let start_time: String
+        let end_time: String
+        let booking_start_date: String
+        let booking_start_time: String
+        let total_quota: Int
+        let location: String
+        let description: String
+        let image: String
+        let exclude_customer: String
+        let status: Int
+        let created_at: String
+        let updated_at: String
+        let badge_booked: Bool
+        let badge_coming_soon: Bool
+        let badge_exclude_customer: Bool
+        let badge_full_book: Bool
+        let badge_available: Bool
+        let badge_end_date: Bool
+        let badge_start_book: Bool
+    }
+}
+
 

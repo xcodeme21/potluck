@@ -134,4 +134,34 @@ class HomeService {
             }
         }.resume()
     }
+    
+    func getDetailEventService(email: String, authorizationHeader: String, id: Int, completion: @escaping (Result<DetailEventResponse, Error>) -> Void) {
+        var urlComponents = URLComponents(string: "https://potluck.eraspace.com/api/potluck/events/\(id)")
+        urlComponents?.queryItems = [URLQueryItem(name: "email", value: email)]
+
+        guard let url = urlComponents?.url else {
+            completion(.failure(ErrorMessage.invalidURL))
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.setValue(authorizationHeader, forHTTPHeaderField: "Authorization")
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            if let data = data {
+                do {
+                    let decodedResponse = try JSONDecoder().decode(DetailEventResponse.self, from: data)
+                    completion(.success(decodedResponse))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }.resume()
+    }
 }
