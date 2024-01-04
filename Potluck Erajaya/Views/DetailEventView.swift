@@ -171,12 +171,13 @@ struct ModalBookForm: View {
     var detailEvent: DetailEventResponse.EventData?
     @State private var selection: String?
 
-    let names = [
-        "Cyril",
-        "Lana",
-        "Mallory",
-        "Sterling"
-    ]
+    var queues: [DetailEventResponse.EventData.QueueData]? {
+        detailEvent?.queues
+    }
+    
+    var names: [String] {
+        queues?.compactMap { "\($0.no_segment) \($0.start_time) - \($0.end_time)" } ?? []
+    }
     
     var body: some View {
         NavigationView() {
@@ -194,19 +195,16 @@ struct ModalBookForm: View {
                     Text("Booking")
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .frame(height: 10)
-                        .padding()
+                        .frame(height: 50)
                         .background(selection != nil ? Color.accentColor : Color.gray)
                         .cornerRadius(8)
-                        .padding(.bottom, 10)
+                        .padding()
                 }
                 .padding(.horizontal, 15)
             }
         }
     }
 }
-
-
 
 struct InfoRow: View {
     let imageName: String
