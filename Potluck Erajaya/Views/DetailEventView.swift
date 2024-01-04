@@ -196,7 +196,7 @@ struct ModalBookForm: View {
                         .frame(maxWidth: .infinity)
                         .frame(height: 10)
                         .padding()
-                        .background(Color.accentColor)
+                        .background(selection != nil ? Color.accentColor : Color.gray)
                         .cornerRadius(8)
                         .padding(.bottom, 10)
                 }
