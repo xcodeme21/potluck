@@ -13,6 +13,7 @@ struct DetailEventView: View {
     @State private var detailEvent: DetailEventResponse.EventData?
     @ObservedObject var homeViewModel = HomeViewModel()
     @State private var errorMessage: String?
+    @State private var isShowingModal = false
     
     var body: some View {
         NavigationView {
@@ -44,57 +45,56 @@ struct DetailEventView: View {
                     .edgesIgnoringSafeArea(.top)
                 }
                 
-                VStack {
-                    if let eventName = detailEvent?.name {
+                if let eventName = detailEvent?.name {
                         Text(eventName)
                             .font(.headline)
+                            .textCase(.uppercase)
+                            .padding(.horizontal)
+                            .padding(.leading, 5)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                
+                if let startDate = detailEvent?.start_date, let endDate = detailEvent?.end_date {
+                    InfoRow(imageName: "calendar", infoText: "\(startDate) - \(endDate)")
+                }
+
+                
+                if let startTime = detailEvent?.start_time, let endTime = detailEvent?.end_time {
+                    InfoRow(imageName: "clock", infoText: "\(startTime) - \(endTime)")
+                }
+                
+                if let location = detailEvent?.location {
+                    InfoRow(imageName: "mappin", infoText: location)
+                }
+                
+                
+                if let description = detailEvent?.description {
+                    ScrollView {
+                        Text(description)
+                            .font(.caption)
                             .padding(.horizontal)
                             .padding(.leading,5)
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .lineSpacing(/*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/)
                     }
-                    
-                    if let startDate = detailEvent?.start_date, let endDate = detailEvent?.end_date {
-                        InfoRow(imageName: "calendar", infoText: "\(startDate) - \(endDate)")
-                    }
-
-                    
-                    if let startTime = detailEvent?.start_time, let endTime = detailEvent?.end_time {
-                        InfoRow(imageName: "clock", infoText: "\(startTime) - \(endTime)")
-                    }
-                    
-                    if let location = detailEvent?.location {
-                        InfoRow(imageName: "mappin", infoText: location)
-                    }
-                    
-                    
-                    if let description = detailEvent?.description {
-                        ScrollView {
-                            Text(description)
-                                .font(.caption)
-                                .padding(.horizontal)
-                                .padding(.leading,5)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.top, 10)
-                        }
-                    }
-
+                    .padding(.vertical,10)
                 }
-                .padding(.top, -60)
+                
+                if detailEvent?.badge_available == true && detailEvent?.badge_end_date != true && detailEvent?.badge_coming_soon == true && detailEvent?.badge_start_book == false {
+                    
+                    GeometryReader { geometry in
+                        if let bookingDate = detailEvent?.booking_start_date, let bookingTime = detailEvent?.booking_start_time {
+                            InformationCard(title: "Information", description: "Sorry, you can book this event on \(bookingDate), time \(bookingTime). Please choose another time😢", imageName: "info.circle")
+                                .padding(.horizontal)
+                        }
+                    }.padding(.bottom, 10)
+                }
                 
                 Spacer()
                 
-                if detailEvent?.badge_coming_soon == true {
-                    GeometryReader { geometry in
-                        if let bookingDate = detailEvent?.booking_start_date, let bookingTime = detailEvent?.booking_start_time {
-                            InformationCard(title: "Information", description: "You can book this event on \(bookingDate), time \(bookingTime)", imageName: "info.circle")
-                                .frame(width: geometry.size.width)
-                        }
-                    }
-                }
-                
                 if detailEvent?.badge_booked == true {
                     Button(action: {
-                        
+                        isShowingModal = true
                     }) {
                         Text("Booked")
                             .foregroundColor(.white)
@@ -110,7 +110,7 @@ struct DetailEventView: View {
                 } else {
                     if detailEvent?.badge_available == true && detailEvent?.badge_end_date != true && detailEvent?.badge_exclude_customer != true && detailEvent?.badge_start_book == true {
                         Button(action: {
-                            
+                            isShowingModal = true
                         }) {
                             Text("Book")
                                 .foregroundColor(.white)
@@ -124,7 +124,7 @@ struct DetailEventView: View {
                         .padding(.horizontal, 15)
                     } else {
                         Button(action: {
-                            
+                            isShowingModal = true
                         }) {
                             Text("Book")
                                 .foregroundColor(.white)
@@ -148,6 +148,7 @@ struct DetailEventView: View {
                         if let eventData = data.data {
                             detailEvent=eventData
                         }
+                        print(detailEvent)
 
                         errorMessage = nil
 
@@ -160,8 +161,52 @@ struct DetailEventView: View {
         .alert(isPresented: $homeViewModel.showAlert) {
             Alert(title: Text("Fetching failed"), message: Text("Get detail events failed with error."), dismissButton: .default(Text("OK")))
         }
+        .sheet(isPresented: $isShowingModal) {
+            ModalBookForm(detailEvent: detailEvent)
+        }
     }
 }
+
+struct ModalBookForm: View {
+    var detailEvent: DetailEventResponse.EventData?
+    @State private var selection: String?
+
+    let names = [
+        "Cyril",
+        "Lana",
+        "Mallory",
+        "Sterling"
+    ]
+    
+    var body: some View {
+        NavigationView() {
+            VStack {
+                List(names, id: \.self, selection: $selection) { name in
+                    Text(name)
+                }
+                .navigationTitle("Choose Available Time Segment")
+                .navigationBarTitleDisplayMode(.inline)
+
+                Spacer()
+                
+                Button(action: {
+                }) {
+                    Text("Booking")
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 10)
+                        .padding()
+                        .background(Color.accentColor)
+                        .cornerRadius(8)
+                        .padding(.bottom, 10)
+                }
+                .padding(.horizontal, 15)
+            }
+        }
+    }
+}
+
+
 
 struct InfoRow: View {
     let imageName: String
@@ -199,7 +244,7 @@ struct InformationCard: View {
     var imageName: String
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 8) {
             HStack {
                 Image(systemName: imageName)
                     .font(.headline)
@@ -212,7 +257,7 @@ struct InformationCard: View {
                 .font(.caption)
                 .foregroundColor(.gray)
         }
-        .padding()
+        .padding(10)
         .background(Color.white)
         .cornerRadius(10)
         .overlay(

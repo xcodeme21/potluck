@@ -91,7 +91,18 @@ struct DetailEventResponse: Codable {
         let badge_available: Bool
         let badge_end_date: Bool
         let badge_start_book: Bool
+        let queues: [QueueData]?
     }
+    
+        struct QueueData: Codable {
+            let id: Int
+            let quota: String
+            let start_time: String
+            let end_time: String
+            let date: String
+            let no_segment: Int
+            let segment_met: Int
+        }
 }
 
 
