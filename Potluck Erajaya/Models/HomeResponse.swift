@@ -105,5 +105,3 @@ struct DetailEventResponse: Codable {
     }
     
 }
-
-

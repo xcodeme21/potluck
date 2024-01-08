@@ -61,7 +61,7 @@ struct ProfileView: View {
                             
                             Divider()
                             
-                            NavigationLink(destination: BookingHistoryView(), isActive: $isBookingHistoryPresented) {
+                            NavigationLink(destination: BookingHistoryView(homeViewModel: homeViewModel, profileViewModel: profileViewModel), isActive: $isBookingHistoryPresented) {
                                 HStack {
                                     Text("Booking History")
                                         .font(.system(size: 16))

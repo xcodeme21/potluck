@@ -9,29 +9,43 @@ import Foundation
 import SwiftUI
 
 struct BookingHistoryView: View {
+    @ObservedObject var homeViewModel: HomeViewModel
+    @ObservedObject var profileViewModel: ProfileViewModel
     @State private var isShowingModal = false
     @State private var selectedBooking: Int? = nil
+    @State private var histories: [HistoriesResponse.HistoryData] = []
+    @State private var errorMessage: String?
     
     var body: some View {
         VStack{
             ScrollView {
                 VStack(spacing: 8) {
-                    ForEach(0..<5) { index in
-                        HistoryCardView()
-                            .onTapGesture {
-                                selectedBooking = index
-                                isShowingModal = true
-                            }
+                    ForEach(histories, id: \.id) { history in
+                        HistoryCardView(history: history, profileViewModel: profileViewModel)
                     }
                 }
                 .padding()
             }
         }
         .navigationTitle("Booking History")
-        .sheet(isPresented: $isShowingModal) {
-            if let index = selectedBooking {
-                DetailModalView(selectedBooking: index)
+        .onAppear {
+            if let userData = homeViewModel.getUserDataFromUserDefaults() {
+                profileViewModel.getHistories(email: userData.email, authorizationHeader: "Basic cG90bHVjazokMmEkMTJOcDB0VVRXMzR2ejZaNTV0TUxUbWMuMzBWNkNLWUlLNlNCN25IOU1TWkZ5a0xzQ3YycWlpNg==") { result in
+                    switch result {
+                    case .success(let data):
+                        if let historiesData = data.data {
+                            histories = historiesData
+                        }
+                        errorMessage = nil
+
+                    case .failure(let error):
+                        errorMessage = "Get events failed with error: \(error)"
+                    }
+                }
             }
+        }
+        .alert(isPresented: $profileViewModel.showAlert) {
+            Alert(title: Text("Fetching failed"), message: Text("Get events failed with error."), dismissButton: .default(Text("OK")))
         }
     }
 }
@@ -70,11 +84,14 @@ struct DetailModalView: View {
 
 
 struct HistoryCardView: View {
+    @State private var isShowDetail = false
+    var history: HistoriesResponse.HistoryData
+    @ObservedObject var profileViewModel: ProfileViewModel
     
     var body: some View {
         HStack(spacing: 12) {
             // Image on the left
-            AsyncImage(url: URL(string: "https://foto.kontan.co.id/FPN05GIgN3RC-9HZEY2Ny-OLEYU=/smart/2021/02/11/1574363234p.jpg")) { image in
+            AsyncImage(url: URL(string: history.event.image)) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -89,22 +106,22 @@ struct HistoryCardView: View {
             
             VStack(alignment: .leading, spacing: 8) {
                 
-                Text("Potluck Ibox")
+                Text(history.event.name)
                     .font(.headline)
                     .foregroundColor(.primary)
                     .padding(.bottom, 4)
                     .textCase(.uppercase)
                 
-                DetailInfoRow(imageName: "calendar", infoText: "14 Dec 2023")
-                DetailInfoRow(imageName: "clock", infoText: "10:00 - 11:00")
-                DetailInfoRow(imageName: "mappin", infoText: "Erajaya Plaza")
+                DetailInfoRow(imageName: "calendar", infoText: history.queue.date)
+                DetailInfoRow(imageName: "clock", infoText: history.queue.start_time + " - " + history.queue.end_time)
+                DetailInfoRow(imageName: "mappin", infoText: history.event.location)
             }
             
             Divider()
                     .frame(height: 50) // Sesuaikan dengan tinggi kartu Anda
                 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("10")
+                    Text(String(history.queue.no_segment))
                         .font(.largeTitle)
                         .foregroundColor(.primary)
                         .fixedSize()
@@ -116,11 +133,5 @@ struct HistoryCardView: View {
         .cornerRadius(12)
         .shadow(radius: 4)
         .padding(.bottom, 10)
-    }
-}
-
-struct BookingHistoryView_Previews: PreviewProvider {
-    static var previews: some View {
-        return BookingHistoryView()
     }
 }

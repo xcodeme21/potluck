@@ -176,7 +176,7 @@ struct ModalBookForm: View {
     }
     
     var names: [String] {
-        queues?.compactMap { "\($0.no_segment) \($0.start_time) - \($0.end_time)" } ?? []
+        queues?.compactMap { "Segment \($0.no_segment) - \($0.date) (\($0.start_time) - \($0.end_time))" } ?? []
     }
     
     var body: some View {
@@ -184,6 +184,7 @@ struct ModalBookForm: View {
             VStack {
                 List(names, id: \.self, selection: $selection) { name in
                     Text(name)
+                        .font(.subheadline)
                 }
                 .navigationTitle("Choose Available Time Segment")
                 .navigationBarTitleDisplayMode(.inline)
