@@ -88,7 +88,7 @@ struct CardView: View {
                                     .clipShape(RoundedCorner(corner: [.topLeft, .bottomRight], radius: 10))
                             }
                             
-                            if event.badge_available == true {
+                            if event.badge_available == true && event.badge_full_book == false {
                                 Text("Available")
                                     .font(.system(size: 10))
                                     .frame(height: 15)
@@ -112,13 +112,16 @@ struct CardView: View {
                         }
                     }
                     
-                    Text(event.name)
-                        .font(.headline)
-                        .foregroundColor(.primary)
-                        .textCase(.uppercase)
-                    
                     HStack {
                         VStack(spacing: 5) {
+                            HStack {
+                                Text(event.name)
+                                    .font(.headline)
+                                    .foregroundColor(.primary)
+                                    .textCase(.uppercase)
+                                Spacer()
+                            }
+                            
                             DetailInfoRow(imageName: "calendar", infoText: event.start_date + " - " + event.end_date)
                             DetailInfoRow(imageName: "clock", infoText: event.start_time + " - " + event.end_time)
                             DetailInfoRow(imageName: "doc.text.magnifyingglass", infoText: "Total quota " + String(event.total_quota))

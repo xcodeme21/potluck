@@ -89,7 +89,7 @@ struct DetailModalView: View {
                             .font(.headline)
                             .textCase(.uppercase)
                         Spacer()
-                        Text("#" + String(history.seq_number))
+                        Text("Queue #" + String(history.seq_number))
                             .font(.headline)
                     }
                     
@@ -214,7 +214,6 @@ struct DetailModalView: View {
                     .cornerRadius(8)
                     .padding()
             }
-            .padding(.horizontal, 15)
         }
     }
 }
