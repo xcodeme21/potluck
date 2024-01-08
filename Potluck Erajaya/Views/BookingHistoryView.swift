@@ -82,11 +82,139 @@ struct DetailModalView: View {
                     }
                 }
             }
-            Text(history.event.name)
-                .font(.headline)
-                .foregroundColor(.primary)
-                .textCase(.uppercase)
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack {
+                        Text(history.event.name)
+                            .font(.headline)
+                            .textCase(.uppercase)
+                        Spacer()
+                        Text("#" + String(history.seq_number))
+                            .font(.headline)
+                    }
+                    
+                    HStack {
+                        Text("Segment")
+                            .font(.subheadline)
+                        Spacer()
+                        Text("\(history.queue.date) (\(history.queue.start_time)-\(history.queue.end_time))")
+                            .font(.subheadline)
+                    }
+                    
+                    HStack {
+                        Text("Location")
+                            .font(.subheadline)
+                        Spacer()
+                        Text(history.event.location)
+                            .font(.subheadline)
+                    }
+                    
+                    HStack {
+                        Text("Event Date")
+                            .font(.subheadline)
+                        Spacer()
+                        Text(history.event.start_date + "-" + history.event.end_date)
+                            .font(.subheadline)
+                    }
+                    
+                    HStack {
+                        Text("Event Time")
+                            .font(.subheadline)
+                        Spacer()
+                        Text(history.event.start_time + "-" + history.event.end_time)
+                            .font(.subheadline)
+                    }
+                    
+                    Divider()
+                    
+                    HStack {
+                        Text("Employee Data")
+                            .font(.headline)
+                        Spacer()
+                    }
+                    
+                    HStack {
+                        Text("Name")
+                            .font(.subheadline)
+                        Spacer()
+                        Text(history.employee.name)
+                            .font(.subheadline)
+                    }
+                    
+                    HStack {
+                        Text("Email")
+                            .font(.subheadline)
+                        Spacer()
+                        Text(history.employee.email)
+                            .font(.subheadline)
+                    }
+                    
+                    if let nik = history.employee.nik {
+                        let nikString = String(nik).replacingOccurrences(of: ".", with: "")
+                        HStack {
+                            Text("NIK")
+                                .font(.subheadline)
+                            Spacer()
+                            Text(nikString)
+                                .font(.subheadline)
+                        }
+                    }
+                    
+                    if let phone = history.employee.phone {
+                        let phoneString = String(phone).replacingOccurrences(of: ".", with: "")
+                        HStack {
+                            Text("WhatsApp Number")
+                                .font(.subheadline)
+                            Spacer()
+                            Text(phoneString)
+                                .font(.subheadline)
+                        }
+                    }
+                    
+                    Divider()
+                    
+                    HStack {
+                        Text("Present")
+                            .font(.subheadline)
+                        Spacer()
+                        if history.present == false {
+                            Image(systemName: "xmark.circle")
+                                .font(.subheadline)
+                                .foregroundColor(.red)
+                        } else {
+                            Image(systemName: "checkmark.circle")
+                                .font(.subheadline)
+                                .foregroundColor(.green)
+                        }
+                    }
+                    
+                    HStack {
+                        Text("Present At")
+                            .font(.subheadline)
+                        Spacer()
+                        Text(history.present_at ?? "-")
+                            .font(.subheadline)
+                    }
+                    
+                }
+                .padding(.horizontal)
+                .background(Color.white)
+            }
+            .padding(.top, -30)
+            
             Spacer()
+            
+            Button(action: {
+            }) {
+                Text("Present")
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 50)
+                    .background(history.present == false ? Color.accentColor : Color.gray)
+                    .cornerRadius(8)
+                    .padding()
+            }
+            .padding(.horizontal, 15)
         }
     }
 }
