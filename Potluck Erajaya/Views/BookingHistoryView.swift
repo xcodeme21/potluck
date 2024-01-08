@@ -12,7 +12,7 @@ struct BookingHistoryView: View {
     @ObservedObject var homeViewModel: HomeViewModel
     @ObservedObject var profileViewModel: ProfileViewModel
     @State private var isShowingModal = false
-    @State private var selectedBooking: Int? = nil
+    @State private var selectedBooking: IdentifiableHistory? = nil
     @State private var histories: [HistoriesResponse.HistoryData] = []
     @State private var errorMessage: String?
     
@@ -22,12 +22,19 @@ struct BookingHistoryView: View {
                 VStack(spacing: 8) {
                     ForEach(histories, id: \.id) { history in
                         HistoryCardView(history: history, profileViewModel: profileViewModel)
+                            .onTapGesture {
+                                selectedBooking = IdentifiableHistory(id: history.id, history: history)
+                                isShowingModal = true
+                            }
                     }
                 }
                 .padding()
             }
         }
         .navigationTitle("Booking History")
+        .sheet(item: $selectedBooking) { booking in
+            DetailModalView(history: booking.history)
+        }
         .onAppear {
             if let userData = homeViewModel.getUserDataFromUserDefaults() {
                 profileViewModel.getHistories(email: userData.email, authorizationHeader: "Basic cG90bHVjazokMmEkMTJOcDB0VVRXMzR2ejZaNTV0TUxUbWMuMzBWNkNLWUlLNlNCN25IOU1TWkZ5a0xzQ3YycWlpNg==") { result in
@@ -51,11 +58,11 @@ struct BookingHistoryView: View {
 }
 
 struct DetailModalView: View {
-    let selectedBooking: Int
+    let history: HistoriesResponse.HistoryData
     
     var body: some View {
         VStack {
-            if let imageURL = URL(string: "https://foto.kontan.co.id/FPN05GIgN3RC-9HZEY2Ny-OLEYU=/smart/2021/02/11/1574363234p.jpg") {
+            if let imageURL = URL(string: history.event.image) {
                 AsyncImage(url: imageURL) { phase in
                     GeometryReader { geometry in
                         if let image = phase.image {
@@ -75,18 +82,21 @@ struct DetailModalView: View {
                     }
                 }
             }
-            Text("Booking \(selectedBooking + 1)")
-                       .font(.title)
-                       .padding()
+            Text(history.event.name)
+                .font(.headline)
+                .foregroundColor(.primary)
+                .textCase(.uppercase)
+            Spacer()
         }
     }
 }
 
 
 struct HistoryCardView: View {
-    @State private var isShowDetail = false
     var history: HistoriesResponse.HistoryData
     @ObservedObject var profileViewModel: ProfileViewModel
+    @State private var isShowDetail = false
+    @State private var selectedBooking: Int?
     
     var body: some View {
         HStack(spacing: 12) {

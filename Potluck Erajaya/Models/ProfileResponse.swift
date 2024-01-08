@@ -83,4 +83,7 @@ struct HistoriesResponse: Codable {
     }
 }
 
-
+struct IdentifiableHistory: Identifiable {
+    let id: Int
+    let history: HistoriesResponse.HistoryData
+}
