@@ -178,7 +178,9 @@ struct DetailEventView: View {
 
 struct ModalBookForm: View {
     var detailEvent: DetailEventResponse.EventData?
-    @State private var selection: String?
+    @State private var selectedIndex: Int?
+    @State private var queueId: Int?
+    @State private var eventId: Int?
 
     var queues: [DetailEventResponse.EventData.QueueData]? {
         detailEvent?.queues
@@ -189,15 +191,23 @@ struct ModalBookForm: View {
     }
     
     var body: some View {
-        NavigationView() {
+        NavigationView {
             VStack {
-                List(names, id: \.self, selection: $selection) { name in
-                    Text(name)
-                        .font(.subheadline)
+                List(0..<names.count, id: \.self, selection: $selectedIndex) { index in
+                    if let selectedQueue = queues?[index] {
+                        Text(names[index])
+                            .font(.subheadline)
+                            .onTapGesture {
+                                selectedIndex = index
+                                queueId=selectedQueue.id
+                                eventId=detailEvent?.id
+                            }
+                    }
                 }
                 .navigationTitle("Choose Available Time Segment")
                 .navigationBarTitleDisplayMode(.inline)
 
+                    
                 Spacer()
                 
                 Button(action: {
@@ -206,7 +216,7 @@ struct ModalBookForm: View {
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .frame(height: 50)
-                        .background(selection != nil ? Color.accentColor : Color.gray)
+                        .background(selectedIndex != nil ? Color.accentColor : Color.gray)
                         .cornerRadius(8)
                         .padding()
                 }
