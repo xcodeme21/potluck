@@ -16,6 +16,7 @@ class HomeViewModel: ObservableObject {
     @Published var phone: String = ""
     @Published var showAlert: Bool = false
     @Published var showModal: Bool = false
+    @Published var showSuccessAlert: Bool = false
     
     private var homeService: HomeService
     
@@ -146,16 +147,18 @@ class HomeViewModel: ObservableObject {
 
                 switch result {
                 case .success(let response):
+                    print("hasil response", response)
                     if response.data == nil {
                         self.showAlert = true
                     } else {
                         self.showAlert = false
+                        self.showSuccessAlert = true
                         completion(.success(response))
                     }
 
 
                 case .failure(let error):
-                    print("Check completion failed with error: \(error)")
+                   // print("Booking failed with error: \(error)")
                     completion(.failure(error))
                 }
             }

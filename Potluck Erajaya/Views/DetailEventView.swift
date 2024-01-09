@@ -170,7 +170,10 @@ struct DetailEventView: View {
             Alert(title: Text("Fetching failed"), message: Text("Get detail events failed with error."), dismissButton: .default(Text("OK")))
         }
         .sheet(isPresented: $isShowingModal) {
-            ModalBookForm(detailEvent: detailEvent)
+            ModalBookForm(homeViewModel: homeViewModel, detailEvent: detailEvent)
+        }
+        .alert(isPresented: $homeViewModel.showSuccessAlert) {
+            Alert(title: Text("Booking Successfully"), message: Text("Congratulations, you're now in the queue! Please visit the booking history page for queue updates and refresh regularly if no ticket appeared 🥰"), dismissButton: .default(Text("OK")))
         }
     }
 }
@@ -212,13 +215,13 @@ struct ModalBookForm: View {
                 
                 Button(action: {
                     if let userData = homeViewModel.getUserDataFromUserDefaults() {
-                        homeViewModel.bookEvent(email: userData.email, queueId: queueId, eventId: eventId, authorizationHeader: "Basic cG90bHVjazokMmEkMTJOcDB0VVRXMzR2ejZaNTV0TUxUbWMuMzBWNkNLWUlLNlNCN25IOU1TWkZ5a0xzQ3YycWlpNg==") { result in
+                        homeViewModel.bookEvent(email: userData.email, queueId: queueId ?? 0, eventId: eventId ?? 0, authorizationHeader: "Basic cG90bHVjazokMmEkMTJOcDB0VVRXMzR2ejZaNTV0TUxUbWMuMzBWNkNLWUlLNlNCN25IOU1TWkZ5a0xzQ3YycWlpNg==") { result in
                             switch result {
                             case .success(let data):
                                 print("result akhir data", data)
 
                             case .failure(let error):
-                                print("Check completion failed with error: \(error)")
+                                print("Booking failed with error: \(error)")
                             }
                         }
                     }
