@@ -157,7 +157,6 @@ struct DetailEventView: View {
                         if let eventData = data.data {
                             detailEvent=eventData
                         }
-                        print(detailEvent)
 
                         errorMessage = nil
 
@@ -177,6 +176,7 @@ struct DetailEventView: View {
 }
 
 struct ModalBookForm: View {
+    @ObservedObject var homeViewModel: HomeViewModel
     var detailEvent: DetailEventResponse.EventData?
     @State private var selectedIndex: Int?
     @State private var queueId: Int?
@@ -211,6 +211,17 @@ struct ModalBookForm: View {
                 Spacer()
                 
                 Button(action: {
+                    if let userData = homeViewModel.getUserDataFromUserDefaults() {
+                        homeViewModel.bookEvent(email: userData.email, queueId: queueId, eventId: eventId, authorizationHeader: "Basic cG90bHVjazokMmEkMTJOcDB0VVRXMzR2ejZaNTV0TUxUbWMuMzBWNkNLWUlLNlNCN25IOU1TWkZ5a0xzQ3YycWlpNg==") { result in
+                            switch result {
+                            case .success(let data):
+                                print("result akhir data", data)
+
+                            case .failure(let error):
+                                print("Check completion failed with error: \(error)")
+                            }
+                        }
+                    }
                 }) {
                     Text("Booking")
                         .foregroundColor(.white)

@@ -164,4 +164,45 @@ class HomeService {
             }
         }.resume()
     }
+    
+    func bookEventService(email: String, queueId: Int, eventId: Int, authorizationHeader: String, completion: @escaping (Result<DetailEventResponse, Error>) -> Void) {
+        let urlString = "http://localhost:8000/api/potluck/events?email=\(email)"
+        let url = URL(string: urlString)!
+
+        let parameters: [String: Any] = [
+            "queue_id": queueId,
+            "event_id": eventId
+        ]
+
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: parameters) else {
+            print("Error creating JSON data")
+            return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(authorizationHeader, forHTTPHeaderField: "Authorization")
+        request.httpBody = jsonData
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            if let data = data {
+                if let responseString = String(data: data, encoding: .utf8) {
+                    print("Response data: \(responseString)")
+                }
+                do {
+                    let response = try JSONDecoder().decode(DetailEventResponse.self, from: data)
+                    completion(.success(response))
+                } catch {
+                    print("Error decoding response: \(error)")
+                    completion(.failure(error))
+                }
+            }
+        }.resume()
+    }
 }

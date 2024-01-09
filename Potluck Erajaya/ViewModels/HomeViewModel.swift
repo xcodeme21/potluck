@@ -137,6 +137,30 @@ class HomeViewModel: ObservableObject {
             }
         }
     }
+    
+    func bookEvent(email: String, queueId: Int, eventId: Int, authorizationHeader: String, completion: @escaping (Result<DetailEventResponse, Error>) -> Void) {
+        if let userData = getUserDataFromUserDefaults() {
+            
+            homeService.bookEventService(email: userData.email, queueId: queueId, eventId: eventId, authorizationHeader: authorizationHeader) { [weak self] result in
+                guard let self = self else { return }
+
+                switch result {
+                case .success(let response):
+                    if response.data == nil {
+                        self.showAlert = true
+                    } else {
+                        self.showAlert = false
+                        completion(.success(response))
+                    }
+
+
+                case .failure(let error):
+                    print("Check completion failed with error: \(error)")
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
 
 
 }
