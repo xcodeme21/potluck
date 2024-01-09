@@ -64,53 +64,6 @@ struct CardView: View {
                 
                 VStack(alignment: .leading, spacing: 8) {
                     
-                    HStack {
-                        Spacer()
-                        
-                        if event.badge_end_date == true {
-                            Text("Ended")
-                                .font(.system(size: 10))
-                                .frame(height: 15)
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 5)
-                                .padding(.vertical, 2)
-                                .background(Color.red)
-                                .clipShape(RoundedCorner(corner: [.topLeft, .bottomRight], radius: 10))
-                        } else {
-                            if event.badge_coming_soon == true {
-                                Text("Cooming Soon")
-                                    .font(.system(size: 10))
-                                    .frame(height: 15)
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 5)
-                                    .padding(.vertical, 2)
-                                    .background(Color.orange)
-                                    .clipShape(RoundedCorner(corner: [.topLeft, .bottomRight], radius: 10))
-                            }
-                            
-                            if event.badge_available == true && event.badge_full_book == false {
-                                Text("Available")
-                                    .font(.system(size: 10))
-                                    .frame(height: 15)
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 5)
-                                    .padding(.vertical, 2)
-                                    .background(Color.blue)
-                                    .clipShape(RoundedCorner(corner: [.topLeft, .bottomRight], radius: 10))
-                            }
-                            
-                            if event.badge_full_book == true {
-                                Text("Fullbook")
-                                    .font(.system(size: 10))
-                                    .frame(height: 15)
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 5)
-                                    .padding(.vertical, 2)
-                                    .background(Color.red)
-                                    .clipShape(RoundedCorner(corner: [.topLeft, .bottomRight], radius: 10))
-                            }
-                        }
-                    }
                     
                     HStack {
                         VStack(spacing: 5) {
@@ -119,6 +72,54 @@ struct CardView: View {
                                     .font(.headline)
                                     .foregroundColor(.primary)
                                     .textCase(.uppercase)
+                                Spacer()
+                            }
+                            
+                            HStack {
+                                if event.badge_end_date == true {
+                                    Text("Ended")
+                                        .font(.system(size: 8))
+                                        .frame(height: 12)
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal, 4)
+                                        .padding(.vertical, 2)
+                                        .background(Color.red)
+                                        .clipShape(RoundedCorner(corner: [.topLeft, .bottomRight], radius: 10))
+                                } else {
+                                    if event.badge_coming_soon == true {
+                                        Text("Cooming Soon")
+                                            .font(.system(size: 8))
+                                            .frame(height: 12)
+                                            .foregroundColor(.white)
+                                            .padding(.horizontal, 4)
+                                            .padding(.vertical, 2)
+                                            .background(Color.orange)
+                                            .clipShape(RoundedCorner(corner: [.topLeft, .bottomRight], radius: 10))
+                                    }
+                                    
+                                    if event.badge_available == true && event.badge_full_book == false {
+                                        Text("Available")
+                                            .font(.system(size: 8))
+                                            .frame(height: 12)
+                                            .foregroundColor(.white)
+                                            .padding(.horizontal, 4)
+                                            .padding(.vertical, 2)
+                                            .background(Color.blue)
+                                            .clipShape(RoundedCorner(corner: [.topLeft, .bottomRight], radius: 10))
+                                    }
+                                    
+                                    if event.badge_full_book == true {
+                                        Text("Fullbook")
+                                            .font(.system(size: 8))
+                                            .frame(height: 12)
+                                            .foregroundColor(.white)
+                                            .padding(.horizontal, 4)
+                                            .padding(.vertical, 2)
+                                            .background(Color.red)
+                                            .clipShape(RoundedCorner(corner: [.topLeft, .bottomRight], radius: 10))
+                                    }
+                                }
+                                
                                 Spacer()
                             }
                             
