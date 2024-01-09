@@ -164,15 +164,12 @@ class HomeService {
             }
         }.resume()
     }
+
     
-    func bookEventService(email: String, queueId: Int, eventId: Int, authorizationHeader: String, completion: @escaping (Result<DetailEventResponse, Error>) -> Void) {
+    func bookEventService(email: String, queueId: Int, eventId: Int, authorizationHeader: String, completion: @escaping (Result<DetailBookingResponse, Error>) -> Void) {
         let urlString = "http://localhost:8000/api/potluck/events?email=\(email)"
         let url = URL(string: urlString)!
-
-        let parameters: [String: Any] = [
-            "queue_id": queueId,
-            "event_id": eventId
-        ]
+        let parameters = ["queue_id": queueId, "event_id": eventId]
 
         guard let jsonData = try? JSONSerialization.data(withJSONObject: parameters) else {
             print("Error creating JSON data")
@@ -192,14 +189,10 @@ class HomeService {
             }
 
             if let data = data {
-                if let responseString = String(data: data, encoding: .utf8) {
-                    print("Response data: \(responseString)")
-                }
                 do {
-                    let response = try JSONDecoder().decode(DetailEventResponse.self, from: data)
+                    let response = try JSONDecoder().decode(DetailBookingResponse.self, from: data)
                     completion(.success(response))
                 } catch {
-                    print("Error decoding response: \(error)")
                     completion(.failure(error))
                 }
             }

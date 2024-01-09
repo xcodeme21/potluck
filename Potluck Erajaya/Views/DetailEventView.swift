@@ -170,10 +170,7 @@ struct DetailEventView: View {
             Alert(title: Text("Fetching failed"), message: Text("Get detail events failed with error."), dismissButton: .default(Text("OK")))
         }
         .sheet(isPresented: $isShowingModal) {
-            ModalBookForm(homeViewModel: homeViewModel, detailEvent: detailEvent)
-        }
-        .alert(isPresented: $homeViewModel.showSuccessAlert) {
-            Alert(title: Text("Booking Successfully"), message: Text("Congratulations, you're now in the queue! Please visit the booking history page for queue updates and refresh regularly if no ticket appeared 🥰"), dismissButton: .default(Text("OK")))
+            ModalBookForm(homeViewModel: homeViewModel, detailEvent: detailEvent, isPresented: $isShowingModal)
         }
     }
 }
@@ -184,6 +181,7 @@ struct ModalBookForm: View {
     @State private var selectedIndex: Int?
     @State private var queueId: Int?
     @State private var eventId: Int?
+    @Binding var isPresented: Bool
 
     var queues: [DetailEventResponse.EventData.QueueData]? {
         detailEvent?.queues
@@ -219,6 +217,7 @@ struct ModalBookForm: View {
                             switch result {
                             case .success(let data):
                                 print("result akhir data", data)
+                                isPresented = false
 
                             case .failure(let error):
                                 print("Booking failed with error: \(error)")
@@ -236,6 +235,12 @@ struct ModalBookForm: View {
                 }
                 .padding(.horizontal, 15)
             }
+        }
+        .alert(isPresented: $homeViewModel.showSuccessAlert) {
+            Alert(title: Text("Booking Successfully"), message: Text("Congratulations, you're now in the queue! Please visit the booking history page for queue updates and refresh regularly if no ticket appeared 🥰"), dismissButton: .default(Text("OK")))
+        }
+        .alert(isPresented: $homeViewModel.showFailedAlert) {
+            Alert(title: Text("Booking failed"), message: Text("Sorry, please try again potluck time😢"), dismissButton: .default(Text("OK")))
         }
     }
 }

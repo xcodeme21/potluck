@@ -25,6 +25,9 @@ enum ErrorMessage: Error {
     case incompleteData
     case invalidURL
     case decodingError
+    case invalidUserData
+    case bookingFailed
+    case noDataReceived
 }
 
 struct HistoriesResponse: Codable {
