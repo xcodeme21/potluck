@@ -45,40 +45,49 @@ struct DetailEventView: View {
                     .edgesIgnoringSafeArea(.top)
                 }
                 
-                if let eventName = detailEvent?.name {
-                        Text(eventName)
+                VStack {
+                    
+                    HStack{
+                        Text(detailEvent?.name ?? "-")
                             .font(.headline)
                             .textCase(.uppercase)
-                            .padding(.horizontal)
-                            .padding(.leading, 5)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        Spacer()
+                        
+                        Text("Total Quota : " + String(detailEvent?.total_quota ?? 0))
+                            .font(.subheadline)
+                        
                     }
-                
-                if let startDate = detailEvent?.start_date, let endDate = detailEvent?.end_date {
-                    InfoRow(imageName: "calendar", infoText: "\(startDate) - \(endDate)")
-                }
-
-                
-                if let startTime = detailEvent?.start_time, let endTime = detailEvent?.end_time {
-                    InfoRow(imageName: "clock", infoText: "\(startTime) - \(endTime)")
-                }
-                
-                if let location = detailEvent?.location {
-                    InfoRow(imageName: "mappin", infoText: location)
-                }
-                
-                
-                if let description = detailEvent?.description {
-                    ScrollView {
-                        Text(description)
-                            .font(.caption)
-                            .padding(.horizontal)
-                            .padding(.leading,5)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .lineSpacing(/*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/)
+                    .padding(.horizontal)
+                    
+                    if let startDate = detailEvent?.start_date, let endDate = detailEvent?.end_date {
+                        InfoRow(imageName: "calendar", infoText: "\(startDate) - \(endDate)")
                     }
-                    .padding(.vertical,10)
+                    
+                    
+                    if let startTime = detailEvent?.start_time, let endTime = detailEvent?.end_time {
+                        InfoRow(imageName: "clock", infoText: "\(startTime) - \(endTime)")
+                    }
+                    
+                    if let location = detailEvent?.location {
+                        InfoRow(imageName: "mappin", infoText: location)
+                    }
+                    
+                    
+                    if let description = detailEvent?.description {
+                        ScrollView {
+                            Text(description)
+                                .font(.caption)
+                                .padding(.horizontal)
+                                .padding(.leading,5)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .lineSpacing(/*@START_MENU_TOKEN@*/10.0/*@END_MENU_TOKEN@*/)
+                        }
+                        .padding(.vertical,10)
+                        .frame(minHeight: 200)
+                    }
                 }
+                .padding(.top, detailEvent?.badge_available == true && detailEvent?.badge_end_date != true && detailEvent?.badge_coming_soon == true && detailEvent?.badge_start_book == false ? 0 : -135)
                 
                 if detailEvent?.badge_available == true && detailEvent?.badge_end_date != true && detailEvent?.badge_coming_soon == true && detailEvent?.badge_start_book == false {
                     
@@ -263,5 +272,6 @@ struct InformationCard: View {
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.gray, lineWidth: 1)
         )
+        .padding(.bottom, -50)
     }
 }
