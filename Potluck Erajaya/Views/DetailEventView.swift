@@ -14,6 +14,7 @@ struct DetailEventView: View {
     @ObservedObject var homeViewModel = HomeViewModel()
     @State private var errorMessage: String?
     @State private var isShowingModal = false
+    @State private var isEventBooked: Bool = false
     
     var body: some View {
         NavigationView {
@@ -101,7 +102,7 @@ struct DetailEventView: View {
                 
                 Spacer()
                 
-                if detailEvent?.badge_booked == true {
+                if detailEvent?.badge_booked == true || isEventBooked == true {
                     Button(action: {
                         isShowingModal = true
                     }) {
@@ -171,6 +172,23 @@ struct DetailEventView: View {
         }
         .sheet(isPresented: $isShowingModal) {
             ModalBookForm(homeViewModel: homeViewModel, detailEvent: detailEvent, isPresented: $isShowingModal)
+            .onDisappear {
+                if let userData = homeViewModel.getUserDataFromUserDefaults() {
+                    homeViewModel.getDetailEvent(email: userData.email, authorizationHeader: "Basic cG90bHVjazokMmEkMTJOcDB0VVRXMzR2ejZaNTV0TUxUbWMuMzBWNkNLWUlLNlNCN25IOU1TWkZ5a0xzQ3YycWlpNg==", id: eventId) { result in
+                        switch result {
+                        case .success(let data):
+                            if let eventData = data.data {
+                                detailEvent=eventData
+                            }
+
+                            errorMessage = nil
+
+                        case .failure(let error):
+                            errorMessage = "Get events failed with error: \(error)"
+                        }
+                    }
+                }
+            }
         }
     }
 }
